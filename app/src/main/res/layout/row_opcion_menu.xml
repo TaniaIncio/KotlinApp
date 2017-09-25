@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    android:gravity="center"
+    android:id="@+id/linear_opc_navigation"
+    android:clickable="true"
+    android:background="@drawable/selector_recycler_row"
+    >
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:id="@+id/img_opc_nav"
+        android:src="@drawable/ic_settings"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vehículo"
+        android:textSize="17sp"
+        android:id="@+id/txt_opc_nav"
+        android:gravity="center"
+        android:textColor="@android:color/white"/>
+</LinearLayout>

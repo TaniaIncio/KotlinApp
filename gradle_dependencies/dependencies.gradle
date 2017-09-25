@@ -1,0 +1,69 @@
+ext {
+
+    /**Version*/
+    supportVersion = '25.3.1'
+    espressoVersion = '2.2.2'
+    constraintlayoutVersion = '1.0.2'
+    butterknifeVersion = '8.4.0'
+    retrofitVersion = '2.1.0'//''2.3.0'
+    picassoVersion = '2.5.2'
+    playservicesVersion = '11.0.1'
+    firebaseVersion = '10.0.1'
+    findbugsVersion = '2.0.1'
+    okhttpVersion = '3.5.0'
+    okhttpLoggingVersion = '3.3.1'
+    aviVersion = '2.1.3'
+    calligraphyVersion = '2.2.0'
+    chartVersion = 'v3.0.2'
+
+    /*'com.github.PhilJay:MPAndroidChart:v3.0.2'*/
+
+    /**Names package**/
+    supportPackage = 'com.android.support'
+    jakeWhartonPackage = 'com.jakewharton'
+    constraintlayoutPackage = 'com.android.support.constraint'
+    retrofitPackage = 'com.squareup.retrofit2'
+    picassoPackage = 'com.squareup.picasso'
+    cardviewPackage = 'com.android.support'
+    playservicePackage = 'com.google.android.gms'
+    firebasePackage = 'com.google.firebase'
+    findbugsPackage = 'com.google.code.findbugs'
+    okhttpPackage = 'com.squareup.okhttp3'
+    aviPackage = 'com.wang.avi'
+    calligraphyPackage = 'uk.co.chrisjenx'
+    chartPackage = 'com.github.PhilJay'
+
+    /**Dependencies**/
+    supportDependencies = [
+            design           : buildDependency(supportPackage, 'design', supportVersion),
+            appCompat        : buildDependency(supportPackage, 'appcompat-v7', supportVersion),
+            vector        : buildDependency(supportPackage, 'support-vector-drawable', supportVersion)]
+
+
+    playServices = [
+            maps           : buildDependency(playservicePackage, 'play-services-maps', playservicesVersion),
+            location           : buildDependency(playservicePackage, 'play-services-location', playservicesVersion),
+            places           : buildDependency(playservicePackage, 'play-services-places', playservicesVersion),
+            ads           : buildDependency(playservicePackage, 'play-services-ads', playservicesVersion)
+    ]
+    firebase = [
+            notifications : buildDependency(firebasePackage, 'firebase-messaging', firebaseVersion)
+    ]
+
+    butterknife = buildDependency(jakeWhartonPackage, 'butterknife', butterknifeVersion)
+    butterknifeProcessor = buildDependency(jakeWhartonPackage, 'butterknife-compiler', butterknifeVersion)
+    retrofit = buildDependency(retrofitPackage, 'retrofit', retrofitVersion)
+    retrofit_gson = buildDependency(retrofitPackage, 'converter-gson', retrofitVersion)
+    picasso = buildDependency(picassoPackage, 'picasso', picassoVersion)
+    cardview = buildDependency(cardviewPackage, 'cardview-v7', supportVersion)
+    findbugs = buildDependency(findbugsPackage, 'jsr305', findbugsVersion)
+    okhttp = buildDependency(okhttpPackage, 'okhttp', okhttpVersion)
+    okhttp_logging = buildDependency(okhttpPackage, 'logging-interceptor', okhttpLoggingVersion)
+    animation = buildDependency(aviPackage, 'library', aviVersion)
+    calligraphy = buildDependency(calligraphyPackage, 'calligraphy', calligraphyVersion)
+    chart = buildDependency(chartPackage, 'MPAndroidChart', chartVersion)
+}
+
+static String buildDependency(String pack, String dependency, String version) {
+    return "${pack}:${dependency}:${version}"
+}

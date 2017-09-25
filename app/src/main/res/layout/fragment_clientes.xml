@@ -1,0 +1,24 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/margin_default"
+    android:orientation="vertical"
+    tools:context="com.tincio.pharmaapp.presentation.fragment.ClientesFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <com.tincio.pharmaapp.presentation.customview.EditTextLightGeneral
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_input_edittext"
+        android:hint="@string/placeholder_name"
+        android:layout_marginBottom="8dp"
+        android:text="@string/hello_blank_fragment" />
+    <com.tincio.pharmaapp.presentation.customview.EditTextLightGeneral
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_input_edittext"
+        android:hint=""
+        android:text="@string/hello_blank_fragment" />
+
+</LinearLayout>
