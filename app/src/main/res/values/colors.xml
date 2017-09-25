@@ -8,5 +8,6 @@
     <color name="grey_dark">#424242</color>
     <color name="blue_900">#0288D1</color>
     <color name="grey_200">#EEEEEE</color>
+    <color name="main_trans50">#801d2340</color>
 
 </resources>

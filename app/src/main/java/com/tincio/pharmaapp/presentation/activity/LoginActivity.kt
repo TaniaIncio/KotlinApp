@@ -19,8 +19,6 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.View
-import android.view.Window
-import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
 import android.widget.ArrayAdapter
 import android.widget.TextView
@@ -134,7 +132,7 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
         if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
-            focusView?.requestFocus()
+           // focusView?.requestFocus()
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
@@ -166,6 +164,7 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
             val shortAnimTime = resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
 
             login_form.visibility = if (show) View.GONE else View.VISIBLE
+            email_sign_in_button.visibility = if (show) View.GONE else View.VISIBLE
             login_form.animate()
                     .setDuration(shortAnimTime)
                     .alpha((if (show) 0 else 1).toFloat())
@@ -270,7 +269,7 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
 
             if (success!!) {
                 finish()
-                val intent = Intent(applicationContext, MapsActivity::class.java)
+                val intent = Intent(applicationContext, PrincipalActivity::class.java)
                 startActivity(intent)
                 finish()
             } else {

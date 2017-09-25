@@ -35,25 +35,26 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".presentation.activity.MapsActivity"
+            android:name=".presentation.activity.PrincipalActivity"
             android:label="@string/title_activity_maps"></activity>
         <activity
             android:name=".presentation.activity.LoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
+            android:windowSoftInputMode="stateHidden|adjustResize"
             android:label="@string/title_activity_login"></activity>
         <activity
             android:name=".presentation.activity.SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_splash"
             android:theme="@style/FullscreenTheme">
-
-        </activity>
-        <activity android:name=".presentation.activity.TestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".presentation.activity.TestActivity">
+
         </activity>
     </application>
 
