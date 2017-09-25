@@ -28,6 +28,12 @@
 
     <!--placeolder-->
     <string name="placeholder_name">Nombre</string>
-    <string name="placeholder_puesto">Nombre</string>
+    <string name="placeholder_puesto">Profesion (doctor,..)</string>
+    <string name="placeholder_empresa">Clinica/hospital</string>
+    <string name="placeholder_horario">Horario de atencion</string>
+
+    <!--name buttons-->
+    <string name="btn_register">Registrar</string>
+
 </resources>
 

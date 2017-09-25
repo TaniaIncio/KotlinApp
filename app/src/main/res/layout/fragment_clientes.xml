@@ -1,24 +1,58 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/margin_default"
     android:orientation="vertical"
-    tools:context="com.tincio.pharmaapp.presentation.fragment.ClientesFragment">
+    tools:context="com.tincio.pharmaapp.presentation.fragment.RegistroClientesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <com.tincio.pharmaapp.presentation.customview.EditTextLightGeneral
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/custom_input_edittext"
-        android:hint="@string/placeholder_name"
-        android:layout_marginBottom="8dp"
-        android:text="@string/hello_blank_fragment" />
-    <com.tincio.pharmaapp.presentation.customview.EditTextLightGeneral
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/custom_input_edittext"
-        android:hint=""
-        android:text="@string/hello_blank_fragment" />
+        android:fillViewport="true">
 
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/margin_default"
+            android:layout_marginBottom="35dp"
+            android:orientation="vertical">
+            <!-- TODO: Update blank fragment layout -->
+            <com.tincio.pharmaapp.presentation.customview.EditTextLightGeneral
+                style="@style/AppTheme.EditTextGeneralStyle"
+                android:layout_marginBottom="8dp"
+                android:hint="@string/placeholder_name"
+                android:imeOptions="actionNext" />
+
+            <com.tincio.pharmaapp.presentation.customview.EditTextLightGeneral
+                style="@style/AppTheme.EditTextGeneralStyle"
+                android:layout_marginBottom="8dp"
+                android:hint="@string/placeholder_puesto"
+                android:imeOptions="actionNext" />
+
+            <com.tincio.pharmaapp.presentation.customview.EditTextLightGeneral
+                style="@style/AppTheme.EditTextGeneralStyle"
+                android:layout_marginBottom="8dp"
+                android:hint="@string/placeholder_empresa"
+                android:imeOptions="actionNext" />
+
+            <com.tincio.pharmaapp.presentation.customview.EditTextLightGeneral
+                style="@style/AppTheme.EditTextGeneralStyle"
+                android:layout_marginBottom="8dp"
+                android:hint="@string/placeholder_horario"
+                android:imeOptions="actionNext" />
+
+
+        </LinearLayout>
+    </ScrollView>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:paddingBottom="@dimen/margin_default">
+    <Button
+        android:id="@+id/email_sign_in_button"
+        style="@style/AppTheme.ButtonGeneralStyle"
+        android:text="@string/btn_register" />
 </LinearLayout>
+</RelativeLayout>

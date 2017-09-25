@@ -20,10 +20,10 @@ public class MenuOpcionInteractor {
     public void getListOpcionMenu(){
         try{
             List<OpcionMenu> list = new ArrayList<>();
-            list.add(new OpcionMenu(1,"Vehículos","auto"));
-            list.add(new OpcionMenu(2,"Reservacion","ic_import_contacts_white_24dp"));
-            list.add(new OpcionMenu(3,"Servicios","auto"));
-            list.add(new OpcionMenu(4,"Preguntas Frecuentes","ic_forum_white_24dp"));
+            list.add(new OpcionMenu(1,"Home","auto"));
+            list.add(new OpcionMenu(2,"Clientes","ic_import_contacts_white_24dp"));
+            list.add(new OpcionMenu(3,"Productos","auto"));
+            list.add(new OpcionMenu(4,"Rutas","ic_forum_white_24dp"));
             list.add(new OpcionMenu(5,"Contacto","ic_contact_phone_white_24dp"));
             list.add(new OpcionMenu(6,"Ubicanos","ic_map_white_24dp"));
             callback.onResponse(list);

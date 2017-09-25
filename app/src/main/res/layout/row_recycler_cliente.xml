@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardview_login"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_margin="@dimen/margin_cardview"
+    card_view:cardBackgroundColor="@android:color/white"
+    card_view:cardCornerRadius="@dimen/elevation_cardview"
+    card_view:cardElevation="@dimen/elevation_cardview">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/margin_default"
+            android:layout_marginStart="@dimen/margin_default"
+            android:orientation="vertical">
+
+            <com.tincio.pharmaapp.presentation.customview.TextViewBoldGeneral
+                style="@style/AppTheme.TextViewBoldStyle"
+                android:text="Juan Perez" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/margin_default"
+            android:layout_marginStart="@dimen/margin_default"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <com.tincio.pharmaapp.presentation.customview.TextViewBoldGeneral
+                style="@style/AppTheme.TextViewBoldStyle"
+                android:text="Medico/Clinica Ricardo Palma"
+                android:textColor="@color/grey_main" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/margin_default"
+            android:layout_marginStart="@dimen/margin_default"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <com.tincio.pharmaapp.presentation.customview.TextViewLightGeneral
+                style="@style/AppTheme.TextViewGneralStyle"
+                android:text="Horario: 8:00am - 9:00am" />
+        </LinearLayout>
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

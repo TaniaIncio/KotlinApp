@@ -13,7 +13,7 @@ import com.tincio.pharmaapp.R
 /**
  * A simple [Fragment] subclass.
  */
-class ClientesFragment : Fragment() {
+class RegistroClientesFragment : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
