@@ -3,11 +3,12 @@
     <color name="colorPrimary">#45b39c</color>
     <color name="colorPrimaryDark">#26A69A</color>
     <color name="colorAccent">#26A69A</color>
-    <color name="grey_main">#8f8f8f</color>
+    <color name="grey_main">#616161</color>
     <color name="black_overlay">#66000000</color>
-    <color name="grey_dark">#424242</color>
+    <color name="grey_dark">#616161</color>
     <color name="blue_900">#0288D1</color>
     <color name="grey_200">#EEEEEE</color>
     <color name="main_trans50">#801d2340</color>
+    <color name="blue_700">#1976D2</color>
 
 </resources>

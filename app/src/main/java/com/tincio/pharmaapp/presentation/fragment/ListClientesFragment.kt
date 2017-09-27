@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import com.tincio.pharmaapp.R
 import com.tincio.pharmaapp.presentation.fragment.dummy.DummyContent
 import com.tincio.pharmaapp.presentation.fragment.dummy.DummyContent.DummyItem
+import kotlinx.android.synthetic.main.list_cliente_fragment.*
 
 /**
  * A fragment representing a list of Items.
@@ -29,6 +30,7 @@ class ListClientesFragment : Fragment() {
     // TODO: Customize parameters
     private var mColumnCount = 1
     private var mListener: OnListFragmentInteractionListener? = null
+    //val TAG : String = ListClientesFragment.javaClass.simpleName
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,17 +45,33 @@ class ListClientesFragment : Fragment() {
         val view = inflater!!.inflate(R.layout.list_cliente_fragment, container, false)
 
         // Set the adapter
-        if (view is RecyclerView) {
+       /* if (view is RecyclerView) {
             val context = view.getContext()
-            val recyclerView = view
-            if (mColumnCount <= 1) {
+            val recyclerView = view*/
+            /*if (mColumnCount <= 1) {
                 recyclerView.layoutManager = LinearLayoutManager(context)
-            } else {
-                recyclerView.layoutManager = GridLayoutManager(context, mColumnCount)
-            }
-            recyclerView.adapter = ClienteRecyclerAdapter(DummyContent.ITEMS, mListener)
-        }
+            } else {*/
+              //  rec_clientes.layoutManager = GridLayoutManager(context, mColumnCount)
+        //    }
+
+      //  }
         return view
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        setupViews()
+        setupEvents()
+    }
+
+    fun setupViews(){
+        rec_clientes.layoutManager = LinearLayoutManager(context)
+        rec_clientes.adapter = ClienteRecyclerAdapter(DummyContent.ITEMS, mListener)
+    }
+    fun setupEvents(){
+        ic_go_register.setOnClickListener{
+            activity.supportFragmentManager.beginTransaction().replace(R.id.container_test, RegistroClientesFragment()).addToBackStack("").commit()
+        }
     }
 
 

@@ -1,10 +1,12 @@
 package com.tincio.pharmaapp.presentation.fragment
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
+import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
@@ -22,6 +24,8 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
 import com.tincio.pharmaapp.R
+import com.tincio.pharmaapp.presentation.activity.ListaRutaActivity
+import com.tincio.pharmaapp.presentation.activity.PrincipalActivity
 import com.tincio.pharmaapp.presentation.adapter.MapAdapterRecycler
 import kotlinx.android.synthetic.main.activity_navigation_menu.*
 import kotlinx.android.synthetic.main.fragment_mapa.*
@@ -61,14 +65,26 @@ class MapaFragment : Fragment(), OnMapReadyCallback {
 //        setUp()
 
         var mapFragment : SupportMapFragment?=null
-        mapFragment = fragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
+        mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
+
         return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setUp()
+        setEvents()
+    }
+
+    fun setEvents(){
+        ic_go_list.setOnClickListener {
+            startActivity(Intent(activity@activity, ListaRutaActivity::class.java))
+            activity.overridePendingTransition(R.anim.slide_up, R.anim.stay) }
+
+        ic_menu.setOnClickListener{
+            activity.drawer_layout.openDrawer(GravityCompat.START)
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event

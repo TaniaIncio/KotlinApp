@@ -1,0 +1,15 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/margin_default"
+    tools:context="com.tincio.pharmaapp.presentation.fragment.ConfiguracionFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+<include layout="@layout/linear_row_config_cliente"/>
+    <include layout="@layout/linear_row_config_necesidades_paciente"/>
+    <include layout="@layout/linear_row_config_comentario_visita"/>
+    <include layout="@layout/linear_row_config_comentario_producto"/>
+
+</LinearLayout>

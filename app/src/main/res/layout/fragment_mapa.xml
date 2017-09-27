@@ -11,13 +11,7 @@
         android:layout_height="match_parent">
 
         <!--menu bar-->
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clickable="true"
-                android:id="@+id/rcv_opc_menu">
 
-            </android.support.v7.widget.RecyclerView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -71,6 +65,16 @@
             android:layout_marginEnd="@dimen/margin_default"
             android:layout_marginTop="10dp"
             android:src="@drawable/ic_list_map"
+            android:id="@+id/ic_go_list"
+            android:tint="@android:color/white" />
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ic_menu"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/margin_default"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_dehaze_black_24dp"
             android:tint="@android:color/white" />
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rec_doctors"

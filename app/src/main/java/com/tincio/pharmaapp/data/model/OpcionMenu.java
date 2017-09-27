@@ -8,6 +8,7 @@ public class OpcionMenu {
     int id;
     String imagen;
     String nombre;
+    String TAG;
 
     OpcionMenu(){}
     public OpcionMenu(int id, String nombre, String imagen){
@@ -15,7 +16,12 @@ public class OpcionMenu {
         this.imagen = imagen;
         this.nombre = nombre;
     }
-
+    public OpcionMenu(int id, String nombre, String imagen,String tag){
+        this.id = id;
+        this.imagen = imagen;
+        this.nombre = nombre;
+        this.TAG = tag;
+    }
     public int getId() {
         return id;
     }

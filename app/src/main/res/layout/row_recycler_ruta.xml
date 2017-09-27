@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cardview_login"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/margin_cardview">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <View
+                android:layout_width="1dp"
+                android:layout_height="40dp"
+                android:background="@android:color/white"></View>
+            <LinearLayout
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:background="@drawable/circle">
+                <com.tincio.pharmaapp.presentation.customview.TextViewLightGeneral
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:textColor="@android:color/white"/>
+            </LinearLayout>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="40dp"
+                android:background="@color/blue_700"></View>
+            
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/margin_default"
+                android:layout_marginStart="@dimen/margin_default"
+                android:orientation="vertical">
+
+                <com.tincio.pharmaapp.presentation.customview.TextViewBoldGeneral
+                    style="@style/AppTheme.TextViewBoldStyle"
+                    android:textColor="@color/grey_dark"
+                    android:text="Marco Tenorio" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/margin_default"
+                android:layout_marginStart="@dimen/margin_default"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <com.tincio.pharmaapp.presentation.customview.TextViewBoldGeneral
+                    style="@style/AppTheme.TextViewBoldStyle"
+                    android:text="Medico/Clinica Ricardo Palma"
+                    android:textColor="@color/grey_main" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/margin_default"
+                android:layout_marginStart="@dimen/margin_default"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <com.tincio.pharmaapp.presentation.customview.TextViewLightGeneral
+                    style="@style/AppTheme.TextViewGneralStyle"
+                    android:text="Horario: 8:00am - 9:00am" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+    <!--new-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <View
+                android:layout_width="1dp"
+                android:layout_height="40dp"
+                android:background="@color/blue_700"></View>
+            <LinearLayout
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:background="@drawable/circle">
+                <com.tincio.pharmaapp.presentation.customview.TextViewLightGeneral
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2"
+                    android:textColor="@android:color/white"/>
+            </LinearLayout>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="40dp"
+                android:background="@color/blue_700"></View>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/margin_default"
+                android:layout_marginStart="@dimen/margin_default"
+                android:orientation="vertical">
+
+                <com.tincio.pharmaapp.presentation.customview.TextViewBoldGeneral
+                    style="@style/AppTheme.TextViewBoldStyle"
+                    android:textColor="@color/grey_dark"
+                    android:text="Leopoldo Sanchez" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/margin_default"
+                android:layout_marginStart="@dimen/margin_default"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <com.tincio.pharmaapp.presentation.customview.TextViewBoldGeneral
+                    style="@style/AppTheme.TextViewBoldStyle"
+                    android:text="Medico/Clinica San Rafael"
+                    android:textColor="@color/grey_main" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/margin_default"
+                android:layout_marginStart="@dimen/margin_default"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <com.tincio.pharmaapp.presentation.customview.TextViewLightGeneral
+                    style="@style/AppTheme.TextViewGneralStyle"
+                    android:text="Horario: 10:00am - 11:00am" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+    <!--new-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <View
+                android:layout_width="1dp"
+                android:layout_height="40dp"
+                android:background="@color/blue_700"></View>
+            <LinearLayout
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:background="@drawable/circle">
+                <com.tincio.pharmaapp.presentation.customview.TextViewLightGeneral
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3"
+                    android:textColor="@android:color/white"/>
+            </LinearLayout>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="40dp"
+                android:background="@color/blue_700"></View>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/margin_default"
+                android:layout_marginStart="@dimen/margin_default"
+                android:orientation="vertical">
+
+                <com.tincio.pharmaapp.presentation.customview.TextViewBoldGeneral
+                    style="@style/AppTheme.TextViewBoldStyle"
+                    android:textColor="@color/grey_dark"
+                    android:text="Pedro Carrillo" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/margin_default"
+                android:layout_marginStart="@dimen/margin_default"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <com.tincio.pharmaapp.presentation.customview.TextViewBoldGeneral
+                    style="@style/AppTheme.TextViewBoldStyle"
+                    android:text="Medico/Clinica Virgen del Carmen"
+                    android:textColor="@color/grey_main" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/margin_default"
+                android:layout_marginStart="@dimen/margin_default"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <com.tincio.pharmaapp.presentation.customview.TextViewLightGeneral
+                    style="@style/AppTheme.TextViewGneralStyle"
+                    android:text="Horario: 12:00am - 2:00pm" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+<!--new-->
+    <!--new-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <View
+                android:layout_width="1dp"
+                android:layout_height="40dp"
+                android:background="@color/blue_700"></View>
+            <LinearLayout
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:background="@drawable/circle">
+                <com.tincio.pharmaapp.presentation.customview.TextViewLightGeneral
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4"
+                    android:textColor="@android:color/white"/>
+            </LinearLayout>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="40dp"
+                android:background="@color/blue_700"></View>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/margin_default"
+                android:layout_marginStart="@dimen/margin_default"
+                android:orientation="vertical">
+
+                <com.tincio.pharmaapp.presentation.customview.TextViewBoldGeneral
+                    style="@style/AppTheme.TextViewBoldStyle"
+                    android:textColor="@color/grey_dark"
+                    android:text="Juan Perez" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/margin_default"
+                android:layout_marginStart="@dimen/margin_default"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <com.tincio.pharmaapp.presentation.customview.TextViewBoldGeneral
+                    style="@style/AppTheme.TextViewBoldStyle"
+                    android:text="Medico/Clinica San Agustin"
+                    android:textColor="@color/grey_main" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/margin_default"
+                android:layout_marginStart="@dimen/margin_default"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <com.tincio.pharmaapp.presentation.customview.TextViewLightGeneral
+                    style="@style/AppTheme.TextViewGneralStyle"
+                    android:text="Horario: 8:00am - 9:00am" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <!--new-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <View
+                android:layout_width="1dp"
+                android:layout_height="40dp"
+                android:background="@color/blue_700"></View>
+            <LinearLayout
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:background="@drawable/circle">
+                <com.tincio.pharmaapp.presentation.customview.TextViewLightGeneral
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    android:textColor="@android:color/white"/>
+            </LinearLayout>
+            <View
+                android:layout_width="1dp"
+                android:layout_height="40dp"
+                android:background="@android:color/white"></View>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/margin_default"
+                android:layout_marginStart="@dimen/margin_default"
+                android:orientation="vertical">
+
+                <com.tincio.pharmaapp.presentation.customview.TextViewBoldGeneral
+                    style="@style/AppTheme.TextViewBoldStyle"
+                    android:textColor="@color/grey_dark"
+                    android:text="Juan Perez" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/margin_default"
+                android:layout_marginStart="@dimen/margin_default"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <com.tincio.pharmaapp.presentation.customview.TextViewBoldGeneral
+                    style="@style/AppTheme.TextViewBoldStyle"
+                    android:text="Medico/Clinica Santo Toribio"
+                    android:textColor="@color/grey_main" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/margin_default"
+                android:layout_marginStart="@dimen/margin_default"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <com.tincio.pharmaapp.presentation.customview.TextViewLightGeneral
+                    style="@style/AppTheme.TextViewGneralStyle"
+                    android:text="Horario: 8:00am - 9:00am" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

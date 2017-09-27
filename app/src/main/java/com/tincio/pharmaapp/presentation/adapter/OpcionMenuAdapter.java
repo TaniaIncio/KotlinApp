@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.tincio.pharmaapp.R;
 import com.tincio.pharmaapp.data.model.OpcionMenu;
+import com.tincio.pharmaapp.presentation.util.Images;
 
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class OpcionMenuAdapter extends RecyclerView.Adapter<OpcionMenuAdapter.Op
     public void onBindViewHolder(OpcionMenuViewHolder holder, int position) {
         opc = list.get(position);
         holder.txtOpcNav.setText(opc.getNombre());
-     //   holder.imgOpc.setImageDrawable(Images.getDrawableByName(context, opc.getImagen()));
+        holder.imgOpc.setImageDrawable(Images.getDrawableByName(context, opc.getImagen()));
        /* if (holder.txtOpcNav.getText().equals("Cerrar Sesion")) {
             holder.imgIrMenu.setImageDrawable(Images.getDrawableByName(context, "ic_plus_close_new2"));
         }
@@ -63,6 +64,9 @@ public class OpcionMenuAdapter extends RecyclerView.Adapter<OpcionMenuAdapter.Op
 
         public OpcionMenuViewHolder(View itemView) {
             super(itemView);
+            txtOpcNav = (TextView) itemView.findViewById(R.id.txt_opc_nav);
+            imgOpc = (ImageView) itemView.findViewById(R.id.img_opc_nav);
+            linearOpcNav = (LinearLayout) itemView.findViewById(R.id.linear_opc_navigation);
             linearOpcNav.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -19,19 +19,18 @@
     <include
         layout="@layout/app_bar_navigation_menu"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
 
         <android.support.design.widget.NavigationView
             android:id="@+id/nav_view"
             android:layout_width="150dp"
             android:layout_height="match_parent"
-            android:background="@mipmap/background_opcion"
-            android:layout_marginTop="?android:attr/actionBarSize"
             android:layout_gravity="start">
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
+                tools:listitem= "@layout/row_opcion_menu"
                 android:id="@+id/rcv_opc_menu">
 
             </android.support.v7.widget.RecyclerView>
