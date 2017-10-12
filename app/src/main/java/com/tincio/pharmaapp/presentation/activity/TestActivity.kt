@@ -34,8 +34,9 @@ class TestActivity : AppCompatActivity(), ListClientesFragment.OnListFragmentInt
         }else if (idFragment.equals("Configuracion")){
             fragment = ConfiguracionFragment()
         }else{
-            finish()
+            finish();
         }
-        supportFragmentManager.beginTransaction().replace(R.id.container_test, fragment).commit()
+        if(fragment!=null)
+            supportFragmentManager.beginTransaction().replace(R.id.container_test, fragment).commit()
     }
 }

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="200dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="0dp"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="0dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dialog_title"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:textColor="#00A499"
+        ></TextView>
+    <NumberPicker
+        android:layout_below="@+id/dialog_title"
+        android:id="@+id/dialog_picker"
+        android:layout_width="150dp"
+       android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:layout_height="180dp"
+        />
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/dialog_picker"
+        android:layout_width="170dp"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        android:gravity="center_horizontal"
+        android:layout_height="50dp" >
+        <Button
+            android:id="@+id/btn_cancelar_picker"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:layout_weight="4.5"
+            android:textColor="#696158"
+            android:textSize="11sp"
+            android:text="Cancelar" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/btn_aceptar_picker"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:layout_weight="4.5"
+            android:textColor="#696158"
+            android:textSize="11sp"
+            android:text="Aceptar" />
+    </LinearLayout>
+</LinearLayout>
