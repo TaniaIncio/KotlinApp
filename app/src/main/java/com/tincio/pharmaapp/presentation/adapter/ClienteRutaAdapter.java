@@ -1,0 +1,90 @@
+package com.tincio.pharmaapp.presentation.adapter;
+
+import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.tincio.pharmaapp.R;
+import com.tincio.pharmaapp.data.model.OpcionMenu;
+import com.tincio.pharmaapp.presentation.util.Images;
+
+import java.util.List;
+
+/**
+ * Created by tincio on 22/07/2016.
+ */
+public class ClienteRutaAdapter extends RecyclerView.Adapter<ClienteRutaAdapter.ClienteRutaViewHolder> {
+
+    Context context;
+    List<String> list;
+
+    public ClienteRutaAdapter(List<String> list) {
+        this.list = list;
+    }
+
+    @Override
+    public ClienteRutaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        context = parent.getContext();
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_cliente_ruta, parent, false);
+        ClienteRutaViewHolder viewHolder = new ClienteRutaViewHolder(view);
+        return viewHolder;
+    }
+
+    OpcionMenu opc;
+
+    @Override
+    public void onBindViewHolder(ClienteRutaViewHolder holder, int position) {
+      /*  opc = list.get(position);
+        holder.txtOpcNav.setText(opc.getNombre());
+        holder.imgOpc.setImageDrawable(Images.getDrawableByName(context, opc.getImagen()));*/
+       /* if (holder.txtOpcNav.getText().equals("Cerrar Sesion")) {
+            holder.imgIrMenu.setImageDrawable(Images.getDrawableByName(context, "ic_plus_close_new2"));
+        }
+        if (holder.txtOpcNav.getText().equals("Cerrar Sesion")) {
+            holder.imgOpc.setVisibility(View.INVISIBLE);
+        }*/
+    }
+
+    @Override
+    public int getItemCount() {
+        return list.size();
+    }
+
+    class ClienteRutaViewHolder extends RecyclerView.ViewHolder {
+
+        LinearLayout linearOpcNav;
+        ImageView imgOpc;
+        TextView txtOpcNav;
+        ImageView imgIrMenu;
+
+        public ClienteRutaViewHolder(View itemView) {
+            super(itemView);
+         /*   txtOpcNav = (TextView) itemView.findViewById(R.id.txt_opc_nav);
+            imgOpc = (ImageView) itemView.findViewById(R.id.img_opc_nav);
+            linearOpcNav = (LinearLayout) itemView.findViewById(R.id.linear_opc_navigation);
+            linearOpcNav.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onItemClickLIstener != null) {
+                        onItemClickLIstener.setOnItemClickListener(list.get(getPosition()));
+                    }
+                }
+            });*/
+        }
+    }
+
+    public OnItemClickListener onItemClickLIstener;
+
+    public interface OnItemClickListener {
+        public void setOnItemClickListener(OpcionMenu opcionMenu);
+    }
+
+    public void setOnItemClickLIstener(OnItemClickListener onItemClickListener) {
+        this.onItemClickLIstener = onItemClickListener;
+    }
+}

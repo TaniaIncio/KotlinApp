@@ -131,8 +131,8 @@ class MapaFragment : Fragment(), OnMapReadyCallback,View.OnClickListener {
                 var indice = layoutManager.findFirstCompletelyVisibleItemPosition();
                 Log.i("indice visible ", " "+layoutManager.findFirstCompletelyVisibleItemPosition()+" position ")
                 if (indice!=-1){
-                    Log.i("ingreso ", " "+layoutManager.findFirstCompletelyVisibleItemPosition()+" position "+markers!![indice].position)
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(markers!![indice].position, ZOOM))
+//                    Log.i("ingreso ", " "+layoutManager.findFirstCompletelyVisibleItemPosition()+" position "+markers!![indice].position)
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Images.getListaLatLng()[indice], ZOOM))
                 }
             }
         })
@@ -158,10 +158,10 @@ class MapaFragment : Fragment(), OnMapReadyCallback,View.OnClickListener {
 
         // Add a marker in Sydney and move the camera
         val sydney = LatLng(-12.0891996,-77.0570098)
-        addMarkers()
-        setUpMap()
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, ZOOM))
-      drawRuta()
+        addMarkers()
+      setUpMap()
+        drawRuta()
     }
 
     fun drawRuta(){
@@ -180,13 +180,25 @@ class MapaFragment : Fragment(), OnMapReadyCallback,View.OnClickListener {
     }
 
     private fun addMarkers(){
-        markers = Array(7, { MarkerOptions().position(LatLng(-12.0891996,-77.0570098)).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker));MarkerOptions().position(LatLng(-12.0949766,-77.0281831)).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker));
+        /*markers = Array(7, { MarkerOptions().position(LatLng(-12.0891996,-77.0570098)).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker));MarkerOptions().position(LatLng(-12.0949766,-77.0281831)).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker));
             MarkerOptions().position(LatLng(-12.1215361,-77.0463574)).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker));
             MarkerOptions().position(LatLng(-12.1443466,-77.0297666)).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker));
             MarkerOptions().position(LatLng(-12.0987112,-77.0528037)).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker));
             MarkerOptions().position(LatLng(-12.086794,-77.0614297)).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker));
-            MarkerOptions().position(LatLng(-12.0871402,-77.0674807)).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker))})
-       }
+            MarkerOptions().position(LatLng(-12.0871402,-77.0674807)).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker))})*/
+       /* for (indice in 0..6)
+            mMap.addMarker(markers!![indice])*/
+        mMap.addMarker(MarkerOptions().position(LatLng(-12.0891996,-77.0570098)).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker)))
+        mMap.addMarker(MarkerOptions().position(LatLng(-12.0949766,-77.0281831)).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker)))
+        mMap.addMarker(MarkerOptions().position(LatLng(-12.1215361,-77.0463574)).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker)))
+        mMap.addMarker(MarkerOptions().position(LatLng(-12.1443466,-77.0297666)).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker)))
+        mMap.addMarker(MarkerOptions().position(LatLng(-12.0987112,-77.0528037)).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker)))
+        mMap.addMarker(MarkerOptions().position(LatLng(-12.086794,-77.0614297)).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker)))
+        mMap.addMarker(MarkerOptions().position(LatLng(-12.0871402,-77.0674807)).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker)))
+
+
+
+    }
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)

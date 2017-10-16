@@ -16,4 +16,5 @@
     <dimen name="elevation_cardview">4dp</dimen>
     <dimen name="corner_cardview">4dp</dimen>
     <dimen name="width_view_cardview">5dp</dimen>
+    <dimen name="margin_bottom_input">10dp</dimen>
 </resources>

@@ -57,7 +57,7 @@
 
             <com.tincio.pharmaapp.presentation.customview.TextViewLightGeneral
                 style="@style/AppTheme.TextViewGneralStyle"
-                android:text="Horario: 8:00am - 9:00am" />
+                android:text="Disponibilidad: 8:00am - 9:00am" />
         </LinearLayout>
 
     </LinearLayout>

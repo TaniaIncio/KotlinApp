@@ -22,25 +22,73 @@
                 style="@style/AppTheme.EditTextGeneralStyle"
                 android:layout_marginBottom="8dp"
                 android:hint="@string/placeholder_name"
+                android:id="@+id/txt_nombre_cliente"
                 android:imeOptions="actionNext" />
 
             <com.tincio.pharmaapp.presentation.customview.EditTextLightGeneral
                 style="@style/AppTheme.EditTextGeneralStyle"
                 android:layout_marginBottom="8dp"
                 android:hint="@string/placeholder_puesto"
+                android:id="@+id/txt_especialidad_cliente"
                 android:imeOptions="actionNext" />
 
             <com.tincio.pharmaapp.presentation.customview.EditTextLightGeneral
                 style="@style/AppTheme.EditTextGeneralStyle"
                 android:layout_marginBottom="8dp"
-                android:hint="@string/placeholder_empresa"
+                android:hint="@string/placeholder_correo"
+                android:id="@+id/txt_correo_cliente"
                 android:imeOptions="actionNext" />
-
             <com.tincio.pharmaapp.presentation.customview.EditTextLightGeneral
                 style="@style/AppTheme.EditTextGeneralStyle"
                 android:layout_marginBottom="8dp"
-                android:hint="@string/placeholder_horario"
+                android:hint="@string/placeholder_hospital"
                 android:imeOptions="actionNext" />
+<!--direccion-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <com.tincio.pharmaapp.presentation.customview.EditTextLightGeneral
+                style="@style/AppTheme.EditTextGeneralStyle"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="8dp"
+                android:hint="@string/placeholder_direccion"
+                android:enabled="true"
+                android:layout_marginEnd="30dp"
+                android:id="@+id/txt_direccion_cliente"
+                android:imeOptions="actionNext" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerInParent="true"
+                    android:tint="@color/grey_dark"
+                    android:id="@+id/btn_direccion_cliente"
+                    android:src="@drawable/ic_edit_location_black_24dp"/>
+            </RelativeLayout>
+            <!--DIsponibilidad-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <com.tincio.pharmaapp.presentation.customview.EditTextLightGeneral
+                    style="@style/AppTheme.EditTextGeneralStyle"
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:hint="@string/placeholder_disponibilidad"
+                    android:enabled="true"
+                    android:layout_marginEnd="30dp"
+                    android:id="@+id/txt_disponibilidad"
+                    android:imeOptions="actionNext" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerInParent="true"
+                    android:tint="@color/grey_dark"
+                    android:id="@+id/btn_disponibilidad_cliente"
+                    android:src="@drawable/ic_schedule_black_24dp"/>
+            </RelativeLayout>
 
 
         </LinearLayout>
@@ -49,7 +97,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
-    android:paddingBottom="@dimen/margin_default">
+    android:minHeight="70dp"
+    android:gravity="center_vertical"
+    >
     <Button
         android:id="@+id/btn_register_client"
         style="@style/AppTheme.ButtonGeneralStyle"

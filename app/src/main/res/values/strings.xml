@@ -28,12 +28,38 @@
 
     <!--placeolder-->
     <string name="placeholder_name">Nombre</string>
-    <string name="placeholder_puesto">Profesion (doctor,..)</string>
-    <string name="placeholder_empresa">Clinica/hospital</string>
-    <string name="placeholder_horario">Horario de atencion</string>
+    <string name="placeholder_puesto">Especialidad (cardiologo,..)</string>
+    <string name="placeholder_hospital">Clinica/hospital</string>
+    <string name="placeholder_correo">Correo electrónico</string>
+    <string name="placeholder_direccion">Dirección</string>
+    <string name="placeholder_disponibilidad">Disponibilidad</string>
+    <string name="placeholder_hora_inicio">Hora Incio</string>
+    <string name="placeholder_hora_fin">Hora Fin</string>
+    <string name="placeholder_semana">Día de la semana</string>
 
     <!--name buttons-->
     <string name="btn_register">Registrar</string>
+    <string name="btn_selector_direction">Seleccionar dirección</string>
+    <string name="title_activity_direccion_map">DIreccion cliente</string>
+    <string name="btn_guardar_disponibilidad">Guardar</string>
+    <string name="btn_guardar">Guardar</string>
+
+    <!--variables preferences-->
+    <string name="preferences_file">preferences</string>
+    <string name="preferences_latitud_cliente">latitud_cliente</string>
+    <string name="preferences_longitud_cliente">longitud_cliente</string>
+    <string name="preferences_direccion_cliente">direccion_cliente</string>
+
+    <!--check-->
+    <string name="chk_lunes">Lunes</string>
+    <string name="chk_martes">Martes</string>
+    <string name="chk_miercoles">Miércoles</string>
+    <string name="chk_jueves">Jueves</string>
+    <string name="chk_viernes">Viernes</string>
+    <string name="chk_sabado">Sábado</string>
+
+    <!--errores o advertencias-->
+    <string name="error_ingrese_hora">Ingrese hora</string>
 
 </resources>
 

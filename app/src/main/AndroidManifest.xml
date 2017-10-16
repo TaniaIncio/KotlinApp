@@ -52,8 +52,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.activity.TestActivity"></activity>
-        <activity android:name=".presentation.activity.ListaRutaActivity"></activity>
+        <activity android:name=".presentation.activity.TestActivity" />
+        <activity android:name=".presentation.activity.ListaRutaActivity" />
+        <activity
+            android:name=".presentation.activity.DireccionMapActivity"
+            android:label="@string/title_activity_direccion_map" />
+        <activity android:name=".presentation.activity.RutaActivity"></activity>
     </application>
 
 </manifest>

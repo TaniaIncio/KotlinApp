@@ -10,7 +10,9 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.tincio.pharmaapp.presentation.util.widget.SpinnerModel;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class Images {
     public static Drawable getDrawableByName(Context context,String name){
@@ -40,6 +42,19 @@ public class Images {
         return new String[]{"Establecer", "Cancelar"};
     }
 
+    public static ArrayList<LatLng> getListaLatLng(){
+        ArrayList<LatLng> lista = new ArrayList<LatLng>();
+        lista.add(new LatLng(-12.0891996, -77.0570098));
+        lista.add(new LatLng(-12.0949766, -77.0281831));
+        lista.add(new LatLng(-12.1215361, -77.0463574));
+
+        lista.add(new LatLng(-12.1443466, -77.0297666));
+        lista.add(new LatLng(-12.0987112, -77.0528037));
+        lista.add(new LatLng(-12.086794, -77.0614297));
+        lista.add(new LatLng(-12.0871402, -77.0674807));
+
+        return lista;
+    }
 
     public static void setMapRuta(GoogleMap map){
         Polyline line = map.addPolyline(new PolylineOptions()

@@ -123,11 +123,11 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
             email.error = getString(R.string.error_field_required)
             focusView = email
             cancel = true
-        } else if (!isEmailValid(emailStr)) {
+        } /*else if (!isEmailValid(emailStr)) {
             email.error = getString(R.string.error_invalid_email)
             focusView = email
             cancel = true
-        }
+        }*/
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first
