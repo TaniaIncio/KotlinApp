@@ -1,8 +1,8 @@
 package com.tincio.pharmaapp.presentation.presenter;
 
 
-import com.tincio.pharmaapp.data.callback.MenuOpcionCallback;
-import com.tincio.pharmaapp.data.interactor.MenuOpcionInteractor;
+import com.tincio.pharmaapp.domain.callback.MenuOpcionCallback;
+import com.tincio.pharmaapp.domain.interactor.MenuOpcionInteractor;
 import com.tincio.pharmaapp.data.model.OpcionMenu;
 import com.tincio.pharmaapp.presentation.view.MenuView;
 

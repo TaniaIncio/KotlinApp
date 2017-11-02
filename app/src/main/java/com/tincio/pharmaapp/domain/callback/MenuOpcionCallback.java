@@ -1,4 +1,4 @@
-package com.tincio.pharmaapp.data.callback;
+package com.tincio.pharmaapp.domain.callback;
 
 import com.tincio.pharmaapp.data.model.OpcionMenu;
 

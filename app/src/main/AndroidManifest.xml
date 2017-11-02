@@ -41,7 +41,9 @@
             android:name=".presentation.activity.LoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_login"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
+            android:windowSoftInputMode="stateHidden|adjustResize"
+            />
+
         <activity
             android:name=".presentation.activity.SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"

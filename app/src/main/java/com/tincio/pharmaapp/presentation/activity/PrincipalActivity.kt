@@ -27,6 +27,13 @@ import android.support.v4.widget.DrawerLayout
 
 
 class PrincipalActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, MapaFragment.OnFragmentInteractionListener, MenuView {
+    override fun showLoader(message: String?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun hideLoader() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     val INTENT_NAME_FRAGMENT: String? = null
     override fun getContext(): Context {

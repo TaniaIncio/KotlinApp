@@ -1,12 +1,8 @@
-package com.tincio.pharmaapp.data.interactor;
+package com.tincio.pharmaapp.domain.interactor;
 
 
-import android.content.Intent;
-
-import com.tincio.pharmaapp.data.callback.MenuOpcionCallback;
+import com.tincio.pharmaapp.domain.callback.MenuOpcionCallback;
 import com.tincio.pharmaapp.data.model.OpcionMenu;
-import com.tincio.pharmaapp.presentation.activity.DireccionMapActivity;
-import com.tincio.pharmaapp.presentation.fragment.ListClientesFragment;
 
 import java.util.ArrayList;
 import java.util.List;

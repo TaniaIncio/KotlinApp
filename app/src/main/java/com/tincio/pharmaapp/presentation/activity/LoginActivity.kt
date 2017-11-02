@@ -5,6 +5,7 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.annotation.TargetApi
 import android.app.LoaderManager.LoaderCallbacks
+import android.content.Context
 import android.content.CursorLoader
 import android.content.Intent
 import android.content.Loader
@@ -23,22 +24,30 @@ import android.view.inputmethod.EditorInfo
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.tincio.pharmaapp.R
+import com.tincio.pharmaapp.data.service.request.UsuarioRequest
+import com.tincio.pharmaapp.presentation.base.BaseActivity
+import com.tincio.pharmaapp.presentation.presenter.UsuarioPresenter
+import com.tincio.pharmaapp.presentation.presenter.UsuarioPresenterImpl
+import com.tincio.pharmaapp.presentation.view.LoginView
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.view_loading_with_text.*
 import java.util.*
 
 /**
  * A login screen that offers login via email/password.
  */
-class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
+class LoginActivity : BaseActivity(), LoaderCallbacks<Cursor>, LoginView {
+
+    var presenter : UsuarioPresenter? = null
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
-    private var mAuthTask: UserLoginTask? = null
+   // private var mAuthTask: UserLoginTask? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
-
+       // setContentView(R.layout.activity_login)
+        presenter = UsuarioPresenterImpl(this)
         // Set up the login form.
         populateAutoComplete()
         password.setOnEditorActionListener(TextView.OnEditorActionListener { _, id, _ ->
@@ -51,6 +60,41 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
 
         email_sign_in_button.setOnClickListener { attemptLogin() }
     }
+
+    override fun onResume() {
+        super.onResume()
+    }
+
+    override fun getLayoutId(): Int {
+        return R.layout.activity_login
+    }
+
+    /*methods view*/
+    override fun getContext(): Context {
+        return this; //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun goNextActivity() {
+        val intent = Intent(applicationContext, PrincipalActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    override fun showLoader(message: String?) {
+        //showLoaderGeneral(message)
+        loading_layout_withtext.visibility = View.VISIBLE
+    }
+
+    override fun hideLoader() {
+      //  hideLoaderGeneral()
+        loading_layout_withtext.visibility = View.GONE
+    }
+
+    override fun showError(message: String?) {
+        onShowDialogGeneral("",message)
+    }
+
+    /*end methods*/
 
     private fun populateAutoComplete() {
         if (!mayRequestContacts()) {
@@ -96,9 +140,9 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
      * errors are presented and no actual login attempt is made.
      */
     private fun attemptLogin() {
-        if (mAuthTask != null) {
+        /*if (mAuthTask != null) {
             return
-        }
+        }*/
 
         // Reset errors.
         email.error = null
@@ -136,9 +180,12 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            showProgress(true)
-            mAuthTask = UserLoginTask(emailStr, passwordStr)
-            mAuthTask!!.execute(null as Void?)
+            //showProgress(true)
+            var request = UsuarioRequest()
+            request.email = email.text.toString()
+            request.password = password.text.toString()
+            presenter!!.loginUser(request)
+
         }
     }
 
@@ -155,41 +202,6 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
     /**
      * Shows the progress UI and hides the login form.
      */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-    private fun showProgress(show: Boolean) {
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
-        // the progress spinner.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            val shortAnimTime = resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
-
-            login_form.visibility = if (show) View.GONE else View.VISIBLE
-            email_sign_in_button.visibility = if (show) View.GONE else View.VISIBLE
-            login_form.animate()
-                    .setDuration(shortAnimTime)
-                    .alpha((if (show) 0 else 1).toFloat())
-                    .setListener(object : AnimatorListenerAdapter() {
-                        override fun onAnimationEnd(animation: Animator) {
-                            login_form.visibility = if (show) View.GONE else View.VISIBLE
-                        }
-                    })
-
-            login_progress.visibility = if (show) View.VISIBLE else View.GONE
-            login_progress.animate()
-                    .setDuration(shortAnimTime)
-                    .alpha((if (show) 1 else 0).toFloat())
-                    .setListener(object : AnimatorListenerAdapter() {
-                        override fun onAnimationEnd(animation: Animator) {
-                            login_progress.visibility = if (show) View.VISIBLE else View.GONE
-                        }
-                    })
-        } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
-            login_progress.visibility = if (show) View.VISIBLE else View.GONE
-            login_form.visibility = if (show) View.GONE else View.VISIBLE
-        }
-    }
 
     override fun onCreateLoader(i: Int, bundle: Bundle?): Loader<Cursor> {
         return CursorLoader(this,
@@ -241,7 +253,7 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    inner class UserLoginTask internal constructor(private val mEmail: String, private val mPassword: String) : AsyncTask<Void, Void, Boolean>() {
+    /*inner class UserLoginTask internal constructor(private val mEmail: String, private val mPassword: String) : AsyncTask<Void, Void, Boolean>() {
 
         override fun doInBackground(vararg params: Void): Boolean? {
             // TODO: attempt authentication against a network service.
@@ -282,7 +294,7 @@ class LoginActivity : AppCompatActivity(), LoaderCallbacks<Cursor> {
             mAuthTask = null
             showProgress(false)
         }
-    }
+    }*/
 
     companion object {
 
