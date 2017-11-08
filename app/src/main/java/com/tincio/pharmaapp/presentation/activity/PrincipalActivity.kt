@@ -25,6 +25,7 @@ import android.content.Intent
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import com.tincio.pharmaapp.presentation.base.BaseActivity
+import kotlinx.android.synthetic.main.view_loading_with_text.*
 
 
 class PrincipalActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener, MapaFragment.OnFragmentInteractionListener, MenuView {
@@ -33,11 +34,14 @@ class PrincipalActivity : BaseActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun showLoader(message: String?) {
-        showLoaderGeneral(message)
+       // showLoaderGeneral(message)
+        txt_loading.text = "Buscando.."
+        loading_layout_withtext.visibility = View.VISIBLE
     }
 
     override fun hideLoader() {
-        hideLoaderGeneral()
+       // hideLoaderGeneral()
+        loading_layout_withtext.visibility = View.GONE
     }
 
     val INTENT_NAME_FRAGMENT: String? = null

@@ -43,6 +43,7 @@ import com.tincio.pharmaapp.presentation.view.MedicosView
 import kotlinx.android.synthetic.main.activity_navigation_menu.*
 import kotlinx.android.synthetic.main.fragment_mapa.*
 import kotlinx.android.synthetic.main.toolbar.*
+import kotlinx.android.synthetic.main.view_spinner_map.*
 import java.util.logging.Logger
 
 /**
@@ -69,6 +70,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback,View.OnClickListener, Medico
     private lateinit var mMap: GoogleMap
     var adapterDoctor: MapAdapterRecycler? = null
     val ZOOM : Float = 12f
+    var sp : Spinner? = null
     //val layoutManager :LinearLayoutManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,7 +90,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback,View.OnClickListener, Medico
         var mapFragment : SupportMapFragment?=null
         mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
-        daySelected = getString(R.string.chk_lunes)
+        daySelected = getString(R.string.chk_miercoles)
         return view
     }
 
@@ -104,6 +106,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback,View.OnClickListener, Medico
         request.offset = OFFSET
         presenter!!.getMedicosDia(request)
     }
+
     fun setEvents(){
         ic_go_list.setOnClickListener {
             startActivity(Intent(activity@activity, ListaRutaActivity::class.java))
@@ -114,9 +117,9 @@ class MapaFragment : Fragment(), OnMapReadyCallback,View.OnClickListener, Medico
         }
 
         spinner_map.setOnClickListener{
-            var sp = Spinner(getActivity(), "Seleccione", Images.getButtons(), Images.getWeek(), this, this);
-             mDialog = sp.getDialog();
-            mDialog!!.show()
+                sp = Spinner(getActivity(), "Seleccione", Images.getButtons(), Images.getWeek(), this, this)
+                mDialog = sp!!.getDialog()
+                mDialog!!.show()
         }
     }
 
@@ -229,7 +232,25 @@ class MapaFragment : Fragment(), OnMapReadyCallback,View.OnClickListener, Medico
     }
 
     override fun onClick(p0: View?) {
+
+        txt_spinner!!.text = Images.getWeek()[sp!!.pos].nombre;
+        if(sp!!.pos == 0){
+            daySelected = getString(R.string.chk_lunes)
+        }
+        if(sp!!.pos == 1){
+            daySelected = getString(R.string.chk_martes)
+        }
+        if(sp!!.pos == 2){
+            daySelected = getString(R.string.chk_miercoles)
+        }
+        if(sp!!.pos == 4){
+            daySelected = getString(R.string.chk_jueves)
+        }
+        if(sp!!.pos == 5){
+            daySelected = getString(R.string.chk_viernes)
+        }
         mDialog!!.dismiss()
+        callMedicos()
     }
 
 
@@ -242,7 +263,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback,View.OnClickListener, Medico
         mMap.setOnMarkerClickListener(object : GoogleMap.OnMarkerClickListener{
             override fun onMarkerClick(marker: Marker?): Boolean {
                 Log.i("indice marker", marker!!.id)
-                rec_doctors.smoothScrollToPosition(marker!!.snippet.toInt())
+               // rec_doctors.smoothScrollToPosition(marker!!.snippet.toInt())
                 return false
             }
         })
@@ -254,6 +275,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback,View.OnClickListener, Medico
             mMap.addMarker(MarkerOptions().position(LatLng(item.latitud.toDouble(),item.longitud.toDouble()))
                     .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker))
                     .snippet(indice.toString())
+                    .title(item.nombres)
                     )
             indice ++
           //          .title(item.id.toString())
