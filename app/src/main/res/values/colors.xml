@@ -11,5 +11,6 @@
     <color name="main_trans50">#801d2340</color>
     <color name="blue_700">#1976D2</color>
     <color name="black_transp_25">#CC000000</color>
+    <color name="amber_200">#FFB300</color>
 
 </resources>

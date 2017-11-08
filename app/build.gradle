@@ -29,7 +29,7 @@ android {
             //https://api.backendless.com/5BA9DF87-1078-DDE2-FF1A-10D9DCAE0600/5EF27282-9F11-333E-FFD6-AE5B390CCC00/data/Usuario?where=email%3D'usuario%40gmail.com'
         }
         prod {
-            buildConfigField 'String', 'BASE_URL', '"https://mobilezonasegura.prima.com.pe:1443/Servicios/Mobile.svc/"'
+            buildConfigField 'String', 'BASE_URL', '"https://api.backendless.com/5BA9DF87-1078-DDE2-FF1A-10D9DCAE0600/5EF27282-9F11-333E-FFD6-AE5B390CCC00/data/"'
         }
     }
 }

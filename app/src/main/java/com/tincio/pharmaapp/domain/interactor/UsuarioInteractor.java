@@ -30,12 +30,11 @@ public class UsuarioInteractor {
     }
 
     public void getUsuario(UsuarioRequest request) {
-        RequestBody caption = RequestBody.create(MediaType.parse("text/plain"), new String(request.getEmail()));
-        Call<List<UsuarioResponse>> response = ApiClient.getApiService().getUsuario(caption, request.getPassword());
+     //   RequestBody caption = RequestBody.create(MediaType.parse("text/plain"), new String(request.getEmail()));
+        Call<List<UsuarioResponse>> response = ApiClient.getApiService().getUsuario("\'"+request.getEmail()+"\'", "\'"+request.getPassword()+"\'");
         Log.i(TAG, " Request Usuario : " + " URL -> " +response.request().url());
         Log.i(TAG, " Request Usuario changed : " + " URL -> " +response.request().url().toString().replace("=","%3D"));
         //response.request().url(originalRequest.url().toString().replace("%3D","="));
-        response.request().newBuilder().url(response.request().url().toString().replace("%3D","="));//.addEncodedQueryParameter("%3D","=").build();
         Log.i(TAG, " Request Usuario : " + " URL -> " +response.request().url());
         //retrofit.baseUrl().newBuilder().addEncodedQueryParameter("%3D","=").build();
         response.enqueue(new Callback<List<UsuarioResponse>>(){

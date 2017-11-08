@@ -24,15 +24,20 @@ import kotlinx.android.synthetic.main.toolbar.*
 import android.content.Intent
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
+import com.tincio.pharmaapp.presentation.base.BaseActivity
 
 
-class PrincipalActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, MapaFragment.OnFragmentInteractionListener, MenuView {
+class PrincipalActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener, MapaFragment.OnFragmentInteractionListener, MenuView {
+    override fun getLayoutId(): Int {
+        return R.layout.activity_navigation_menu
+    }
+
     override fun showLoader(message: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        showLoaderGeneral(message)
     }
 
     override fun hideLoader() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        hideLoaderGeneral()
     }
 
     val INTENT_NAME_FRAGMENT: String? = null
@@ -89,5 +94,7 @@ class PrincipalActivity : AppCompatActivity(), NavigationView.OnNavigationItemSe
         navigationView.setNavigationItemSelectedListener(this)
     }
 
-
+    override fun showDialog(message: String?) {
+        onShowDialogGeneral("",message)
+    }
 }

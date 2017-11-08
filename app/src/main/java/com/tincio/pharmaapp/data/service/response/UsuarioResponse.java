@@ -3,9 +3,6 @@ package com.tincio.pharmaapp.data.service.response;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by Jhonatan on 26/01/2017.
- */
 
 public class UsuarioResponse {
 

@@ -1,10 +1,13 @@
 package com.tincio.pharmaapp.presentation.fragment
 
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
@@ -25,12 +28,18 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 
 import com.tincio.pharmaapp.R
+import com.tincio.pharmaapp.data.service.request.MedicosRequest
+import com.tincio.pharmaapp.data.service.response.MedicosResponse
 import com.tincio.pharmaapp.presentation.activity.ListaRutaActivity
 import com.tincio.pharmaapp.presentation.activity.PrincipalActivity
 import com.tincio.pharmaapp.presentation.adapter.MapAdapterRecycler
+import com.tincio.pharmaapp.presentation.presenter.MedicosPresenter
+import com.tincio.pharmaapp.presentation.presenter.MedicosPresenterImpl
 import com.tincio.pharmaapp.presentation.util.Images
+import com.tincio.pharmaapp.presentation.util.MapaUtil
 import com.tincio.pharmaapp.presentation.util.widget.Spinner
 import com.tincio.pharmaapp.presentation.util.widget.SpinnerModel
+import com.tincio.pharmaapp.presentation.view.MedicosView
 import kotlinx.android.synthetic.main.activity_navigation_menu.*
 import kotlinx.android.synthetic.main.fragment_mapa.*
 import kotlinx.android.synthetic.main.toolbar.*
@@ -44,18 +53,22 @@ import java.util.logging.Logger
  * Use the [MapaFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class MapaFragment : Fragment(), OnMapReadyCallback,View.OnClickListener {
-    override fun onClick(p0: View?) {
-        mDialog!!.dismiss()
-    }
+class MapaFragment : Fragment(), OnMapReadyCallback,View.OnClickListener, MedicosView {
 
     // TODO: Rename and change types of parameters
     private var mParam1: String? = null
     private var mParam2: String? = null
     var markers : Array<MarkerOptions>? = null
+    var presenter: MedicosPresenter? = null
+    var daySelected : String = ""
+    val OFFSET = 20
+    var listMedicos: MutableList<MedicosResponse>? = null
 
     private var mListener: OnFragmentInteractionListener? = null
     var mDialog: Dialog? = null
+    private lateinit var mMap: GoogleMap
+    var adapterDoctor: MapAdapterRecycler? = null
+    val ZOOM : Float = 12f
     //val layoutManager :LinearLayoutManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,23 +84,26 @@ class MapaFragment : Fragment(), OnMapReadyCallback,View.OnClickListener {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater!!.inflate(R.layout.fragment_mapa, container, false)
-     /*   val mapFragment = view.findViewById<View>(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)*/
-//        setUp()
-
+        presenter = MedicosPresenterImpl(this)
         var mapFragment : SupportMapFragment?=null
         mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
-
+        daySelected = getString(R.string.chk_lunes)
         return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        setUp()
         setEvents()
     }
 
+
+    fun callMedicos(){
+        var request = MedicosRequest()
+        request.dia = daySelected
+        request.offset = OFFSET
+        presenter!!.getMedicosDia(request)
+    }
     fun setEvents(){
         ic_go_list.setOnClickListener {
             startActivity(Intent(activity@activity, ListaRutaActivity::class.java))
@@ -105,24 +121,13 @@ class MapaFragment : Fragment(), OnMapReadyCallback,View.OnClickListener {
     }
 
 
-    // TODO: Rename method, update argument and hook method into UI event
-    fun onButtonPressed(uri: Uri) {
-        if (mListener != null) {
-            mListener!!.onFragmentInteraction(uri)
-        }
-    }
-
-    private lateinit var mMap: GoogleMap
-    var adapterDoctor: MapAdapterRecycler? = null
-    val ZOOM : Float = 14f
 
 
     private fun setUp(){
-        var array = Array(7, {  "";"";"";"";"";"";"";""})
         val layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         rec_doctors.layoutManager = layoutManager
         rec_doctors.hasFixedSize()
-        adapterDoctor = MapAdapterRecycler(array)
+        adapterDoctor = MapAdapterRecycler(listMedicos, daySelected)
         rec_doctors.adapter = adapterDoctor
         rec_doctors.addOnScrollListener(object: RecyclerView.OnScrollListener() {
             // layoutManager.findFirstCompletelyVisibleItemPosition()
@@ -132,7 +137,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback,View.OnClickListener {
                 Log.i("indice visible ", " "+layoutManager.findFirstCompletelyVisibleItemPosition()+" position ")
                 if (indice!=-1){
 //                    Log.i("ingreso ", " "+layoutManager.findFirstCompletelyVisibleItemPosition()+" position "+markers!![indice].position)
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Images.getListaLatLng()[indice], ZOOM))
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(listMedicos!!.get(indice).latitud.toDouble(),listMedicos!!.get(indice).longitud.toDouble()), ZOOM))
                 }
             }
         })
@@ -159,45 +164,7 @@ class MapaFragment : Fragment(), OnMapReadyCallback,View.OnClickListener {
         // Add a marker in Sydney and move the camera
         val sydney = LatLng(-12.0891996,-77.0570098)
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, ZOOM))
-        addMarkers()
-      setUpMap()
-        drawRuta()
-    }
-
-    fun drawRuta(){
-        Images.setMapRuta(mMap)
-    }
-
-    private fun setUpMap(){
-        mMap.setOnMarkerClickListener(object : GoogleMap.OnMarkerClickListener{
-            override fun onMarkerClick(marker: Marker?): Boolean {
-                Log.i("indice marker", marker!!.id)
-
-                return false
-            }
-
-        })
-    }
-
-    private fun addMarkers(){
-        /*markers = Array(7, { MarkerOptions().position(LatLng(-12.0891996,-77.0570098)).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker));MarkerOptions().position(LatLng(-12.0949766,-77.0281831)).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker));
-            MarkerOptions().position(LatLng(-12.1215361,-77.0463574)).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker));
-            MarkerOptions().position(LatLng(-12.1443466,-77.0297666)).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker));
-            MarkerOptions().position(LatLng(-12.0987112,-77.0528037)).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker));
-            MarkerOptions().position(LatLng(-12.086794,-77.0614297)).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker));
-            MarkerOptions().position(LatLng(-12.0871402,-77.0674807)).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker))})*/
-       /* for (indice in 0..6)
-            mMap.addMarker(markers!![indice])*/
-        mMap.addMarker(MarkerOptions().position(LatLng(-12.0891996,-77.0570098)).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker)))
-        mMap.addMarker(MarkerOptions().position(LatLng(-12.0949766,-77.0281831)).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker)))
-        mMap.addMarker(MarkerOptions().position(LatLng(-12.1215361,-77.0463574)).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker)))
-        mMap.addMarker(MarkerOptions().position(LatLng(-12.1443466,-77.0297666)).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker)))
-        mMap.addMarker(MarkerOptions().position(LatLng(-12.0987112,-77.0528037)).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker)))
-        mMap.addMarker(MarkerOptions().position(LatLng(-12.086794,-77.0614297)).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker)))
-        mMap.addMarker(MarkerOptions().position(LatLng(-12.0871402,-77.0674807)).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker)))
-
-
-
+        callMedicos()
     }
 
     override fun onAttach(context: Context?) {
@@ -214,18 +181,12 @@ class MapaFragment : Fragment(), OnMapReadyCallback,View.OnClickListener {
         mListener = null
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     *
-     *
-     * See the Android Training lesson [Communicating with Other Fragments](http://developer.android.com/training/basics/fragments/communicating.html) for more information.
-     */
     interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         fun onFragmentInteraction(uri: Uri)
+        fun showLoader(message: String?)
+        fun hideLoader()
+        fun showDialog(message: String?)
     }
 
     companion object {
@@ -233,18 +194,6 @@ class MapaFragment : Fragment(), OnMapReadyCallback,View.OnClickListener {
         // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
         private val ARG_PARAM1 = "param1"
         private val ARG_PARAM2 = "param2"
-
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-
-         * @param param1 Parameter 1.
-         * *
-         * @param param2 Parameter 2.
-         * *
-         * @return A new instance of fragment MapaFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         fun newInstance(param1: String, param2: String): MapaFragment {
             val fragment = MapaFragment()
             val args = Bundle()
@@ -254,4 +203,68 @@ class MapaFragment : Fragment(), OnMapReadyCallback,View.OnClickListener {
             return fragment
         }
     }
+
+    /**Methodos herence*/
+
+    override fun showError(message: String?) {
+        if(mListener!=null)
+            mListener!!.showLoader(getString(R.string.loader_searching_medicos))
+    }
+
+    override fun hideLoader() {
+        mListener!!.hideLoader()
+    }
+
+    override fun drawMedicosinMap(listMedicos: MutableList<MedicosResponse>?) {
+        this.listMedicos = listMedicos
+        addMarkers()
+        setUpMap()
+        drawRuta()
+        setUp()
+    }
+
+    override fun showLoader(message: String?) {
+        if(mListener!=null)
+            mListener!!.showLoader(getString(R.string.loader_searching_medicos))
+    }
+
+    override fun onClick(p0: View?) {
+        mDialog!!.dismiss()
+    }
+
+
+    fun drawRuta(){
+        MapaUtil.drawRoute(LatLng(listMedicos!!.get(0).latitud.toDouble(), listMedicos!!.get(0).latitud.toDouble()),
+                LatLng(listMedicos!!.get(1).latitud.toDouble(), listMedicos!!.get(1).latitud.toDouble()), mMap)
+    }
+
+    private fun setUpMap(){
+        mMap.setOnMarkerClickListener(object : GoogleMap.OnMarkerClickListener{
+            override fun onMarkerClick(marker: Marker?): Boolean {
+                Log.i("indice marker", marker!!.id)
+                rec_doctors.smoothScrollToPosition(marker!!.snippet.toInt())
+                return false
+            }
+        })
+    }
+
+    private fun addMarkers(){
+        var indice : Int = 0
+        for (item: MedicosResponse in listMedicos!!){
+            mMap.addMarker(MarkerOptions().position(LatLng(item.latitud.toDouble(),item.longitud.toDouble()))
+                    .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker))
+                    .snippet(indice.toString())
+                    )
+            indice ++
+          //          .title(item.id.toString())
+        }
+        //  .snippet(indice.toString())
+        if(listMedicos!!.size > 0){
+            val sydney = LatLng(listMedicos!!.get(0).latitud.toDouble(),listMedicos!!.get(0).longitud.toDouble())
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, ZOOM))
+        }
+    }
+
+    /*end meths */
+
 }// Required empty public constructor

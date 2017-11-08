@@ -53,7 +53,7 @@ public class ApiClient {
                 String string = original.url().toString();
                 //string = string.replace("%26", "&")
                 string = string.replace("where%3D", "where=");
-                string = string.replace("email=", "email%3D");
+                string = string.replace("email=", "email%3D");//%27
                 string = string.replace("password=", "password%3D");
                 Request newRequest = new Request.Builder()
                         .url(string)

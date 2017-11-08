@@ -9,7 +9,7 @@
     <dimen name="size_icon_splash">90dp</dimen>
     <dimen name="margin_bottom_splash">50dp</dimen>
     <dimen name="size_textview">16sp</dimen>
-    <dimen name="size_textview_hour">28sp</dimen>
+    <dimen name="size_textview_hour">25sp</dimen>
     <dimen name="size_separacion_inputs">10dp</dimen>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="margin_cardview">8dp</dimen>

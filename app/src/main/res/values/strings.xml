@@ -62,9 +62,11 @@
     <string name="error_ingrese_hora">Ingrese hora</string>
     <string name="error_usuario_clave">Usuario o contraseña incorrectos</string>
     <string name="error_service">Ocurrió un error en nuestro servidor</string>
+    <string name="error_empty_medicos">No hay medicos disponible en la fecha seleccionada</string>
 
     <!--Loaders-->
     <string name="loader_login">Iniciando sesión</string>
+    <string name="loader_searching_medicos">Buscando médicos...</string>
 
 </resources>
 
