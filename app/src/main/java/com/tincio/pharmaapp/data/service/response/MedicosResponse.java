@@ -100,6 +100,8 @@ public class MedicosResponse {
     @Expose
     private String viernesInicio;
 
+    private double distance;
+
     public String getId() {
         return id;
     }
@@ -352,4 +354,11 @@ public class MedicosResponse {
         return "";
     }
 
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
 }

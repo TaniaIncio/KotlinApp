@@ -68,5 +68,11 @@
     <string name="loader_login">Iniciando sesión</string>
     <string name="loader_searching_medicos">Buscando médicos...</string>
 
+    <string-array name="array_place">
+        <item>Bangalore</item>
+        <item>Tokyo</item>
+        <item>New York</item>
+    </string-array>
+
 </resources>
 

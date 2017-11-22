@@ -36,6 +36,7 @@
 
         <activity
             android:name=".presentation.activity.PrincipalActivity"
+            android:theme="@style/OverlayActivityTheme"
             android:label="@string/title_activity_maps" />
         <activity
             android:name=".presentation.activity.LoginActivity"
@@ -48,11 +49,7 @@
             android:name=".presentation.activity.SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/FullscreenTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".presentation.activity.TestActivity" />
         <activity android:name=".presentation.activity.ListaRutaActivity" />
@@ -60,6 +57,17 @@
             android:name=".presentation.activity.DireccionMapActivity"
             android:label="@string/title_activity_direccion_map" />
         <activity android:name=".presentation.activity.RutaActivity"></activity>
+
+        <activity
+            android:name=".presentation.activity.OverlayRouteActivity"
+            android:theme="@style/OverlayActivityTheme"
+            android:label="@string/title_activity_maps">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

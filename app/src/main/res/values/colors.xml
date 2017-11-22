@@ -12,5 +12,8 @@
     <color name="blue_700">#1976D2</color>
     <color name="black_transp_25">#CC000000</color>
     <color name="amber_200">#FFB300</color>
+    <color name="color_marker">#8BC34A</color>
+    <color name="color_marker_line">#4e4878</color>
+
 
 </resources>
