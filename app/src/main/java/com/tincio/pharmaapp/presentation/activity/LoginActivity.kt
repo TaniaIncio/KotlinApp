@@ -75,7 +75,7 @@ class LoginActivity : BaseActivity(), LoaderCallbacks<Cursor>, LoginView {
     }
 
     override fun goNextActivity() {
-        val intent = Intent(applicationContext, PrincipalActivity::class.java)
+        val intent = Intent(applicationContext, OverlayRouteActivity::class.java)
         startActivity(intent)
         finish()
     }

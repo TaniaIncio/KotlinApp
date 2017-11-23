@@ -30,7 +30,8 @@
 
         ></android.support.v7.widget.RecyclerView>-->
 
-    <include layout="@layout/content_navigation_menu" />
+    <!--<include layout="@layout/content_navigation_menu" />-->
+    <include layout="@layout/activity_projection_route" />
 
 
 </android.support.design.widget.CoordinatorLayout>

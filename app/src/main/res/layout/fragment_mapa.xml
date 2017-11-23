@@ -81,7 +81,7 @@
             android:tint="@android:color/white" />
 -->
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rec_doctors"
+            android:id="@+id/rec_doctors_mapa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
