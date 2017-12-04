@@ -99,6 +99,9 @@ public class MedicosResponse {
     @SerializedName("viernes_inicio")
     @Expose
     private String viernesInicio;
+    @SerializedName("prioridad")
+    @Expose
+    private String prioridad;
 
     private double distance;
 
@@ -356,6 +359,14 @@ public class MedicosResponse {
 
     public double getDistance() {
         return distance;
+    }
+
+    public String getPrioridad() {
+        return prioridad;
+    }
+
+    public void setPrioridad(String prioridad) {
+        this.prioridad = prioridad;
     }
 
     public void setDistance(double distance) {

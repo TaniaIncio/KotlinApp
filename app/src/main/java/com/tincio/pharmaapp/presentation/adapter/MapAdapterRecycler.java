@@ -43,7 +43,7 @@ public class MapAdapterRecycler extends RecyclerView.Adapter<MapAdapterRecycler.
     @Override
     public void onBindViewHolder(ViewHolderItem holder, int position) {
         MedicosResponse item = arrayString.get(position);
-        holder.txtName.setText(item.getNombres()+" "+item.getApellidos());
+        holder.txtName.setText(item.getNombres());
         holder.txtHospital.setText(item.getHospital());
         holder.txtDireccion.setText(item.getDireccion());
         holder.txtHoraInicio.setText(item.getHoraInicio(day,context));

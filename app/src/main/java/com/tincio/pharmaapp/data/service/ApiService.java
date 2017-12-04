@@ -26,23 +26,23 @@ public interface ApiService {
  +    Call<List<StepResponse>> geSteps(@Query(value = "where", encoded = true) String idRecipe);*/
 
     @GET(ApiConstants.GET_MEDICOS_LUNES)
-    //https://api.backendless.com/5BA9DF87-1078-DDE2-FF1A-10D9DCAE0600/5EF27282-9F11-333E-FFD6-AE5B390CCC00/data/medicos?offset=20&where=lunes_inicio!%3D''
-    Call<List<MedicosResponse>> getMedicosLunes(@Query(value = "offset", encoded = true) int offset);
+    //https://api.backendless.com/5BA9DF87-1078-DDE2-FF1A-10D9DCAE0600/5EF27282-9F11-333E-FFD6-AE5B390CCC00/data/medicos?pageSize=20&where=lunes_inicio!%3D''
+    Call<List<MedicosResponse>> getMedicosLunes(@Query(value = "pageSize", encoded = true) int pageSize);
 
     @GET(ApiConstants.GET_MEDICOS_MARTES)
-        //https://api.backendless.com/5BA9DF87-1078-DDE2-FF1A-10D9DCAE0600/5EF27282-9F11-333E-FFD6-AE5B390CCC00/data/medicos?offset=20&where=lunes_inicio!%3D''
-    Call<List<MedicosResponse>> getMedicosMartes(@Query(value = "offset", encoded = true) int offset);
+        //https://api.backendless.com/5BA9DF87-1078-DDE2-FF1A-10D9DCAE0600/5EF27282-9F11-333E-FFD6-AE5B390CCC00/data/medicos?pageSize=20&where=lunes_inicio!%3D''
+    Call<List<MedicosResponse>> getMedicosMartes(@Query(value = "pageSize", encoded = true) int pageSize);
 
     @GET(ApiConstants.GET_MEDICOS_MIERCOLES)
-        //https://api.backendless.com/5BA9DF87-1078-DDE2-FF1A-10D9DCAE0600/5EF27282-9F11-333E-FFD6-AE5B390CCC00/data/medicos?offset=20&where=lunes_inicio!%3D''
-    Call<List<MedicosResponse>> getMedicosMiercoles(@Query(value = "offset", encoded = true) int offset);
+        //https://api.backendless.com/5BA9DF87-1078-DDE2-FF1A-10D9DCAE0600/5EF27282-9F11-333E-FFD6-AE5B390CCC00/data/medicos?pageSize=20&where=lunes_inicio!%3D''
+    Call<List<MedicosResponse>> getMedicosMiercoles(@Query(value = "pageSize", encoded = true) int pageSize);
 
     @GET(ApiConstants.GET_MEDICOS_JUEVES)
-        //https://api.backendless.com/5BA9DF87-1078-DDE2-FF1A-10D9DCAE0600/5EF27282-9F11-333E-FFD6-AE5B390CCC00/data/medicos?offset=20&where=lunes_inicio!%3D''
-    Call<List<MedicosResponse>> getMedicosJueves(@Query(value = "offset", encoded = true) int offset);
+        //https://api.backendless.com/5BA9DF87-1078-DDE2-FF1A-10D9DCAE0600/5EF27282-9F11-333E-FFD6-AE5B390CCC00/data/medicos?pageSize=20&where=lunes_inicio!%3D''
+    Call<List<MedicosResponse>> getMedicosJueves(@Query(value = "pageSize", encoded = true) int pageSize);
 
     @GET(ApiConstants.GET_MEDICOS_VIERNES)
-        //https://api.backendless.com/5BA9DF87-1078-DDE2-FF1A-10D9DCAE0600/5EF27282-9F11-333E-FFD6-AE5B390CCC00/data/medicos?offset=20&where=lunes_inicio!%3D''
-    Call<List<MedicosResponse>> getMedicosViernes(@Query(value = "offset", encoded = true) int offset);
+        //https://api.backendless.com/5BA9DF87-1078-DDE2-FF1A-10D9DCAE0600/5EF27282-9F11-333E-FFD6-AE5B390CCC00/data/medicos?pageSize=20&where=lunes_inicio!%3D''
+    Call<List<MedicosResponse>> getMedicosViernes(@Query(value = "pageSize", encoded = true) int pageSize);
 
 }

@@ -207,7 +207,7 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
     private void callMedicos() {
         MedicosRequest request = new MedicosRequest();
         request.setDia(daySelected);// = daySelected
-        request.setOffset(10);//= OFFSET
+        request.setOffset(40);//= OFFSET
         presenter = new MedicosPresenterImpl(this);
         presenter.getMedicosDia(request);
     }
@@ -330,7 +330,8 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
     @Override
     public void drawMedicosinMap(List<MedicosResponse> listMedicos) {
         this.listMedicos = listMedicos;
-        orderMoreImportance();
+       orderTime();
+        // orderMoreImportance();
         orderMoreClose();
         fillPoints();
     }
@@ -349,13 +350,31 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
             }
         });
     }
+
+    void orderTime(){
+        Collections.sort(this.listMedicos, new Comparator<MedicosResponse>() {
+            @Override
+            public int compare(MedicosResponse lhs, MedicosResponse rhs) {
+                // -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
+                return getSeconds(lhs.getJuevesInicio()) > getSeconds(rhs.getJuevesInicio()) ? -1 :
+                        (getSeconds(lhs.getJuevesInicio()) < getSeconds(rhs.getJuevesInicio())) ? 1 : 0;
+            }
+        });
+    }
+
+    int getSeconds (String time){
+        String[] units = time.split(":"); //will break the string up into an array
+        int minutes = Integer.parseInt(units[0]); //first element
+        int seconds = Integer.parseInt(units[1]); //second element
+        return 60 * minutes + seconds;
+    }
     void orderMoreImportance(){
         Collections.sort(this.listMedicos, new Comparator<MedicosResponse>() {
             @Override
             public int compare(MedicosResponse lhs, MedicosResponse rhs) {
                 // -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
-                return Integer.valueOf(lhs.getImportanciaMedico()) > Integer.valueOf(rhs.getImportanciaMedico()) ? -1 :
-                        (Integer.valueOf(lhs.getImportanciaMedico()) < Integer.valueOf(rhs.getImportanciaMedico())) ? 1 : 0;
+                return Integer.valueOf(lhs.getPrioridad()) > Integer.valueOf(rhs.getPrioridad()) ? -1 :
+                        (Integer.valueOf(lhs.getPrioridad()) < Integer.valueOf(rhs.getPrioridad())) ? 1 : 0;
             }
         });
     }
@@ -475,7 +494,7 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
         } else if (Calendar.FRIDAY == dayOfWeek) {
             daySelected = getString(R.string.chk_viernes);
         } else if (Calendar.SATURDAY == dayOfWeek) {
-            daySelected = getString(R.string.chk_lunes);;
+            daySelected = getString(R.string.chk_lunes);
         } else if (Calendar.SUNDAY == dayOfWeek) {
             daySelected = getString(R.string.chk_lunes);;
         }
