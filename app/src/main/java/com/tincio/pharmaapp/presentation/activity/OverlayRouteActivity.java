@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -19,48 +18,36 @@ import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.FrameLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.ahmadrosid.lib.drawroutemap.DrawRouteMaps;
 import com.amalbit.trail.RouteOverlayView;
 import com.amalbit.trail.TrailSupportMapFragment;
-import com.google.android.gms.location.places.Place;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MapStyleOptions;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.maps.android.clustering.Cluster;
 import com.google.maps.android.clustering.ClusterManager;
-import com.google.maps.android.clustering.algo.GridBasedAlgorithm;
 import com.tincio.pharmaapp.R;
-import com.tincio.pharmaapp.data.Data;
 import com.tincio.pharmaapp.data.model.OpcionMenu;
 import com.tincio.pharmaapp.data.service.request.MedicosRequest;
 import com.tincio.pharmaapp.data.service.response.MedicosResponse;
 import com.tincio.pharmaapp.presentation.adapter.MapAdapterRecycler;
 import com.tincio.pharmaapp.presentation.adapter.OpcionMenuAdapter;
-import com.tincio.pharmaapp.presentation.base.BaseActivity;
 import com.tincio.pharmaapp.presentation.presenter.MedicosPresenter;
 import com.tincio.pharmaapp.presentation.presenter.MedicosPresenterImpl;
 import com.tincio.pharmaapp.presentation.presenter.MenuOpcionPresenter;
 import com.tincio.pharmaapp.presentation.util.MapaUtil;
 import com.tincio.pharmaapp.presentation.util.maps.CustomClusterRenderer;
-import com.tincio.pharmaapp.presentation.util.maps.MapAnimator;
 import com.tincio.pharmaapp.presentation.util.maps.MyItemCluster;
 import com.tincio.pharmaapp.presentation.view.MedicosView;
 import com.tincio.pharmaapp.presentation.view.MenuView;
@@ -94,13 +81,13 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
     MapAdapterRecycler adapterDoctor = null;
     RecyclerView rcv_opc_menu;
     DrawerLayout drawer_layout;
-    String INTENT_NAME_FRAGMENT= null;
+    String INTENT_NAME_FRAGMENT = null;
     OpcionMenuAdapter adapterMenu;
-    MenuOpcionPresenter presenterMenu= null;
+    MenuOpcionPresenter presenterMenu = null;
     Toolbar toolbar;
     FloatingActionButton ic_menu;
     String daySelected;
-
+    List<MedicosResponse> listMedicosFinal;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,7 +102,7 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
         ic_menu = findViewById(R.id.ic_menu);
         daySelected = getString(R.string.chk_jueves);
 
-        toolbar= findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         mSwitchCompat = findViewById(R.id.switch_btn);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -125,7 +112,7 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
 
         mapFragment = (TrailSupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_fragment);
         mapFragment.getMapAsync(this);
-       mapStyle = MapStyleOptions.loadRawResourceStyle(getApplicationContext(), R.raw.mapstyle);
+        mapStyle = MapStyleOptions.loadRawResourceStyle(getApplicationContext(), R.raw.mapstyle);
         /***/
         listPoints = new ArrayList<>();
         listPointsMedicos = new ArrayList<>();
@@ -169,10 +156,11 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
 
     }
 
-    void setEvents(){
+    void setEvents() {
         mSwitchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(!b)
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (!b)
                     mapStyle = MapStyleOptions.loadRawResourceStyle(getApplicationContext(), R.raw.mapstyle);
                 else
                     mapStyle = null;
@@ -254,12 +242,13 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
         mClusterManager.setOnClusterItemClickListener(new ClusterManager.OnClusterItemClickListener<MyItemCluster>() {
             @Override
             public boolean onClusterItemClick(MyItemCluster myItemCluster) {
-                Log.i("itms seleccionados ", myItemCluster.getOrder()+" order item seleccionado");
+                Log.i("itms seleccionados ", myItemCluster.getOrder() + " order item seleccionado");
                 ArrayList<MedicosResponse> lista = new ArrayList<>();
                 lista.add(myItemCluster.getItem());
                 adapterDoctor = new MapAdapterRecycler(lista, "Jueves");
                 rec_doctors.setAdapter(adapterDoctor);
                 rec_doctors.setVisibility(View.VISIBLE);
+                setEventsRecyclerDoctor();
                 return false;
             }
         });
@@ -267,20 +256,31 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
             @Override
             public boolean onClusterClick(Cluster<MyItemCluster> cluster) {
                 ArrayList<MedicosResponse> lista = new ArrayList<>();
-                for (MyItemCluster item: cluster.getItems()){
+                for (MyItemCluster item : cluster.getItems()) {
                     lista.add(item.getItem());
                 }
                 adapterDoctor = new MapAdapterRecycler(lista, "Jueves");
                 rec_doctors.setAdapter(adapterDoctor);
                 rec_doctors.setVisibility(View.VISIBLE);
-              //  lista.add(cluster.getItems());
-                Log.i("itms seleccionados ", cluster.getItems().size()+" order item cluster seleccionado");
+                //  lista.add(cluster.getItems());
+                setEventsRecyclerDoctor();
+                Log.i("itms seleccionados ", cluster.getItems().size() + " order item cluster seleccionado");
                 return false;
             }
         });
 
         /*adapterDoctor = new MapAdapterRecycler(listMedicos, "Jueves");
         rec_doctors.setAdapter(adapterDoctor);*/
+    }
+
+    void setEventsRecyclerDoctor() {
+
+        adapterDoctor.setOnItemClickListener(new MapAdapterRecycler.OnItemClickListener() {
+            @Override
+            public void setOnItemClickListener(int posicion) {
+                startActivity(new Intent(getApplicationContext(), RegistrarClienteActivity.class));
+            }
+        });
     }
 
     public void zoomRoute(List<LatLng> lstLatLngRoute) {
@@ -291,7 +291,7 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
         for (LatLng latLngPoint : lstLatLngRoute)
             boundsBuilder.include(latLngPoint);
 
-        int routePadding = 400;
+        int routePadding = 100;
         LatLngBounds latLngBounds = boundsBuilder.build();
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, routePadding));
@@ -299,8 +299,8 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
 
 
     private RouteOverlayView.AnimType getCurrentAnimType() {
-      //  if(mSwitchCompat.isChecked()) {
-          //  return RouteOverlayView.AnimType.ARC;
+        //  if(mSwitchCompat.isChecked()) {
+        //  return RouteOverlayView.AnimType.ARC;
     /*    } else {
             return RouteOverlayView.AnimType.ARC;
         }*/
@@ -330,19 +330,20 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
     @Override
     public void drawMedicosinMap(List<MedicosResponse> listMedicos) {
         this.listMedicos = listMedicos;
-       orderTime();
+        orderTime();
         // orderMoreImportance();
-        orderMoreClose();
+      //  orderMoreClose();
+        checkTime();
         fillPoints();
     }
 
-    void orderMoreClose(){
-        if(listMedicos.size()==0)return;
-        LatLng latLngReference =  new LatLng(Double.parseDouble(listMedicos.get(0).getLatitud()),Double.parseDouble(listMedicos.get(0).getLongitud()));
+    void orderMoreClose() {
+        if (listMedicos.size() == 0) return;
+        LatLng latLngReference = new LatLng(Double.parseDouble(listMedicos.get(0).getLatitud()), Double.parseDouble(listMedicos.get(0).getLongitud()));
         listMedicos.get(0).setDistance(0);
-        for (int i = 1; i< listMedicos.size();i++){
-             listMedicos.get(i).setDistance(MapaUtil.haversine(latLngReference.latitude, latLngReference.longitude,
-                     Double.parseDouble(listMedicos.get(i).getLatitud()),Double.parseDouble(listMedicos.get(i).getLongitud())));
+        for (int i = 1; i < listMedicos.size(); i++) {
+            listMedicos.get(i).setDistance(MapaUtil.haversine(latLngReference.latitude, latLngReference.longitude,
+                    Double.parseDouble(listMedicos.get(i).getLatitud()), Double.parseDouble(listMedicos.get(i).getLongitud())));
         }
         Collections.sort(listMedicos, new Comparator<MedicosResponse>() {
             public int compare(MedicosResponse p1, MedicosResponse p2) {
@@ -351,7 +352,7 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
         });
     }
 
-    void orderTime(){
+    void orderTime() {
         Collections.sort(this.listMedicos, new Comparator<MedicosResponse>() {
             @Override
             public int compare(MedicosResponse lhs, MedicosResponse rhs) {
@@ -362,13 +363,76 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
         });
     }
 
-    int getSeconds (String time){
+
+
+    void checkTime() {
+        listMedicosFinal = new ArrayList<>();
+        if (this.listMedicos.size() == 0) return;
+        MedicosResponse itemInicio = this.listMedicos.get(0);
+        listMedicosFinal.add(itemInicio);
+        for (int i = 1; i < listMedicos.size(); i++) {
+            itemInicio= new MedicosResponse();
+            /**Si trabajan en el mismo hospital y mismo horario**/
+            if (getHour(listMedicos.get(i)).equals(getHour(itemInicio)) && itemInicio.getLatitud() == listMedicos.get(i).getLatitud()) {
+                itemInicio = listMedicos.get(i);
+//                this.listMedicosFinal.add(itemInicio);
+            } else {
+                /***Buscar el que este mas cerca**/
+                itemInicio = getMedicosMasCercaPoint(i, itemInicio);
+                i = i+(itemInicio.getOrder()-i);
+               // this.listMedicosFinal.add(itemInicio);
+            }
+            this.listMedicosFinal.add(itemInicio);
+            // itemInicio = listMedicos.get(i);
+        }
+    }
+
+    MedicosResponse getMedicosMasCercaPoint(int indiceStart, MedicosResponse itemCheck) {
+        MedicosResponse itemNext = null;
+        List<MedicosResponse> listMedicosTemp = new ArrayList<>();
+        for (int i = indiceStart; i < indiceStart + 5; i++) {
+            if (i == listMedicos.size()) break;
+            listMedicosTemp.add(listMedicos.get(i));
+            listMedicosTemp.get(listMedicosTemp.size()-1).setOrder(indiceStart);
+        }
+
+        LatLng latLngReference = new LatLng(Double.parseDouble(itemCheck.getLatitud()), Double.parseDouble(itemCheck.getLongitud()));
+
+        for (int i = 1; i < listMedicosTemp.size(); i++) {
+            listMedicosTemp.get(i).setDistance(MapaUtil.haversine(latLngReference.latitude, latLngReference.longitude,
+                    Double.parseDouble(listMedicosTemp.get(i).getLatitud()), Double.parseDouble(listMedicosTemp.get(i).getLongitud())));
+        }
+        Collections.sort(listMedicosTemp, new Comparator<MedicosResponse>() {
+            public int compare(MedicosResponse p1, MedicosResponse p2) {
+                return Double.compare(p1.getDistance(), p2.getDistance());
+            }
+        });
+
+        return  listMedicosTemp.size()>=2 ? listMedicosTemp.get(1): null;
+    }
+
+    String getHour(MedicosResponse item) {
+        if (daySelected.equals(getString(R.string.chk_jueves)))
+            return item.getJuevesInicio();
+        if (daySelected.equals(getString(R.string.chk_miercoles)))
+            return item.getMiercolesInicio();
+        if (daySelected.equals(getString(R.string.chk_martes)))
+            return item.getMartesInicio();
+        if (daySelected.equals(getString(R.string.chk_lunes)))
+            return item.getLunesInicio();
+        if (daySelected.equals(getString(R.string.chk_viernes)))
+            return item.getViernesInicio();
+        return "";
+    }
+
+    int getSeconds(String time) {
         String[] units = time.split(":"); //will break the string up into an array
         int minutes = Integer.parseInt(units[0]); //first element
         int seconds = Integer.parseInt(units[1]); //second element
         return 60 * minutes + seconds;
     }
-    void orderMoreImportance(){
+
+    void orderMoreImportance() {
         Collections.sort(this.listMedicos, new Comparator<MedicosResponse>() {
             @Override
             public int compare(MedicosResponse lhs, MedicosResponse rhs) {
@@ -379,50 +443,54 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
         });
     }
 
-    void fillPoints(){
+    void fillPoints() {
         checkDistanceInKilometer();
         zoomRoute(listPoints);
         drawPointInMap();
         int i = 0;
-        for (LatLng item: listPoints){
+        for (LatLng item : listPoints) {
+            if (i == listPoints.size() - 1) return;
             DrawRouteMaps.getInstance(this, this)
-                    .draw(listPoints.get(i), listPoints.get(i+1), mMap);
-            i ++;
+                    .draw(listPoints.get(i), listPoints.get(i + 1), mMap);
+            i++;
         }
 
     }
 
-    void checkDistanceInKilometer(){
-        for (MedicosResponse item: listMedicos) {
-            if(item.getDistance() <= 5) {
+    void checkDistanceInKilometer() {
+        for (MedicosResponse item : listMedicosFinal) {
+         //   if (item.getDistance() <= 5) {
                 listPoints.add(new LatLng(Double.parseDouble(item.getLatitud()), Double.parseDouble(item.getLongitud())));
                 listPointsMedicos.add(item);
-            }
+           // }
         }
     }
 
-    void drawPointInMap(){
+    void drawPointInMap() {
         int indice = 0;
-        for (LatLng item: listPoints) {
-                MyItemCluster offsetItem = new MyItemCluster(item.latitude, item.longitude, indice, listPointsMedicos.get(indice));
-                mClusterManager.addItem(offsetItem);
+        for (LatLng item : listPoints) {
+            MyItemCluster offsetItem = new MyItemCluster(item.latitude, item.longitude, indice, listPointsMedicos.get(indice));
+            mClusterManager.addItem(offsetItem);
 
             /* mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(item.getLatitud()), Double.parseDouble(item.getLongitud())))
                     .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker))
                     .snippet(String.valueOf(indice))
                     .title(item.getNombres()+" "+item.getApellidos())
             );*/
-            indice ++;
+            indice++;
         }
     }
+
     @Override
     public void getAllPoints(List<LatLng> points) {
         mapFragment.setUpPath(points, mMap, getCurrentAnimType());
         mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
-            @Override public void onMapLoaded() {
+            @Override
+            public void onMapLoaded() {
                 //zoomRoute(listPoints);
                 mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
-                    @Override public void onCameraMove() {
+                    @Override
+                    public void onCameraMove() {
                         mapFragment.onCameraMove(mMap);
                     }
                 });
@@ -459,9 +527,9 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
         datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Log.i("dia seleccionado ","day of month "+dayOfMonth);
+                Log.i("dia seleccionado ", "day of month " + dayOfMonth);
                 Calendar c = Calendar.getInstance();
-                c.set(year,monthOfYear,dayOfMonth);
+                c.set(year, monthOfYear, dayOfMonth);
                 int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
                 daySelected(dayOfWeek);
                 mMap.clear();
@@ -473,22 +541,24 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
                 mClusterManager = new ClusterManager<MyItemCluster>(getContext(), mMap);
                 //mClusterManager.setAlgorithm(new GridBasedAlgorithm<MyItemCluster>());
                 callMedicos();
-            //    dateSelected.set(year, monthOfYear, dayOfMonth, 0, 0);
-              //  dateEditText.setText(dateFormatter.format(dateSelected.getTime()));
+                //    dateSelected.set(year, monthOfYear, dayOfMonth, 0, 0);
+                //  dateEditText.setText(dateFormatter.format(dateSelected.getTime()));
             }
 
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.show();
-       // dateEditText.setText(dateFormatter.format(dateSelected.getTime()));
+        // dateEditText.setText(dateFormatter.format(dateSelected.getTime()));
     }
 
-    void daySelected(int dayOfWeek){
+    void daySelected(int dayOfWeek) {
         if (Calendar.MONDAY == dayOfWeek) {
             daySelected = getString(R.string.chk_lunes);
         } else if (Calendar.TUESDAY == dayOfWeek) {
-            daySelected = getString(R.string.chk_martes);;
+            daySelected = getString(R.string.chk_martes);
+            ;
         } else if (Calendar.WEDNESDAY == dayOfWeek) {
-            daySelected = getString(R.string.chk_miercoles);;
+            daySelected = getString(R.string.chk_miercoles);
+            ;
         } else if (Calendar.THURSDAY == dayOfWeek) {
             daySelected = getString(R.string.chk_jueves);
         } else if (Calendar.FRIDAY == dayOfWeek) {
@@ -496,7 +566,8 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
         } else if (Calendar.SATURDAY == dayOfWeek) {
             daySelected = getString(R.string.chk_lunes);
         } else if (Calendar.SUNDAY == dayOfWeek) {
-            daySelected = getString(R.string.chk_lunes);;
+            daySelected = getString(R.string.chk_lunes);
+            ;
         }
     }
 
@@ -515,7 +586,7 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
         setEventMenu();
     }
 
-    void setEventMenu(){
+    void setEventMenu() {
         adapterMenu.setOnItemClickLIstener(new OpcionMenuAdapter.OnItemClickListener() {
             @Override
             public void setOnItemClickListener(OpcionMenu opcionMenu) {
@@ -525,9 +596,11 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
                 startActivity(intent);
             }
         });
+
+
     }
 
-    private void setupNavigationDrawer(){
+    private void setupNavigationDrawer() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer_layout.setDrawerListener(toggle);
@@ -543,7 +616,9 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
         //void onFragmentInteraction(uri: Uri)
 
         void showLoader(String message);
+
         void hideLoader();
+
         void showDialog(String message);
     }
 }

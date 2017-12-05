@@ -104,6 +104,7 @@ public class MedicosResponse {
     private String prioridad;
 
     private double distance;
+    private int order;
 
     public String getId() {
         return id;
@@ -371,5 +372,13 @@ public class MedicosResponse {
 
     public void setDistance(double distance) {
         this.distance = distance;
+    }
+
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
     }
 }

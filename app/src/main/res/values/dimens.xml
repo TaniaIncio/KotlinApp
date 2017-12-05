@@ -17,4 +17,5 @@
     <dimen name="corner_cardview">4dp</dimen>
     <dimen name="width_view_cardview">5dp</dimen>
     <dimen name="margin_bottom_input">10dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

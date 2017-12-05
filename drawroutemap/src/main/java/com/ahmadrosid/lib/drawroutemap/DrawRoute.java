@@ -48,8 +48,8 @@ public class DrawRoute extends AsyncTask<String, Void, String> implements DrawSe
     @Override
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
-        RouteDrawerTask routeDrawerTask = new RouteDrawerTask(mMap, this);
-        routeDrawerTask.execute(result);
+       /* RouteDrawerTask routeDrawerTask = new RouteDrawerTask(mMap, this);
+        routeDrawerTask.execute(result);*/
     }
 
     /**

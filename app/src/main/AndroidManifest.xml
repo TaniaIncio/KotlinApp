@@ -34,17 +34,17 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-      <!--  <activity
+        <!--
+            <activity
             android:name=".presentation.activity.PrincipalActivity"
             android:theme="@style/OverlayActivityTheme"
-            android:label="@string/title_activity_maps" />-->
+            android:label="@string/title_activity_maps" />
+        -->
         <activity
             android:name=".presentation.activity.LoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_login"
-            android:windowSoftInputMode="stateHidden|adjustResize"
-            />
-
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".presentation.activity.SplashActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -60,13 +60,14 @@
         <activity
             android:name=".presentation.activity.DireccionMapActivity"
             android:label="@string/title_activity_direccion_map" />
-        <activity android:name=".presentation.activity.RutaActivity"></activity>
-
+        <activity android:name=".presentation.activity.RutaActivity" />
         <activity
             android:name=".presentation.activity.OverlayRouteActivity"
-            android:theme="@style/OverlayActivityTheme"
-            android:label="@string/title_activity_maps">
-        </activity>
+            android:label="@string/title_activity_maps"
+            android:theme="@style/OverlayActivityTheme"></activity>
+        <activity
+            android:name=".presentation.activity.RegistrarClienteActivity"
+            android:label="@string/title_activity_registrar_cliente"></activity>
     </application>
 
 </manifest>

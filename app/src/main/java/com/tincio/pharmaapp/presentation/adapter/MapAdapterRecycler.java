@@ -92,15 +92,17 @@ public class MapAdapterRecycler extends RecyclerView.Adapter<MapAdapterRecycler.
                 }
             });
 
-        /*    txtItemRecycler = (TextView)itemView.findViewById(R.id.txt_item_recycler);
-            itemView.setOnClickListener(new View.OnClickListener() {
+           // linkEditar.
+
+           // txtItemRecycler = (TextView)itemView.findViewById(R.id.txt_item_recycler);
+             linkEditar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if(mOnItemClickListener!=null){
                         mOnItemClickListener.setOnItemClickListener(getPosition());
                     }
                 }
-            });*/
+            });
         }
 
     }

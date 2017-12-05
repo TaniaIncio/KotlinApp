@@ -36,6 +36,11 @@
     <string name="placeholder_hora_inicio">Hora Incio</string>
     <string name="placeholder_hora_fin">Hora Fin</string>
     <string name="placeholder_semana">Día de la semana</string>
+    <string name="placeholder_producto">Producto</string>
+    <string name="placeholder_necesidad_cliente">Necesidad cliente</string>
+    <string name="placeholder_necesidad_paciente">Necesidad paciente</string>
+    <string name="placeholder_comentario_visita">Comentario visita</string>
+    <string name="placeholder_comentario_producto">Comentario producto</string>
 
     <!--name buttons-->
     <string name="btn_register">Registrar</string>
@@ -73,6 +78,7 @@
         <item>Tokyo</item>
         <item>New York</item>
     </string-array>
+    <string name="title_activity_registrar_cliente">RegistrarClienteActivity</string>
 
 </resources>
 
