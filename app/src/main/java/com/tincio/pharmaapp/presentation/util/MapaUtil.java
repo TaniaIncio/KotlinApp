@@ -165,10 +165,10 @@ public class MapaUtil {
         String parameters = str_origin + "&" + str_dest + "&" + sensor + "&" + mode;
 
         // Output format
-        String output = "json";
+        String output = "json?key=AIzaSyCVYbZC61TKZNrGPtn_JLNHnZqdlsF4AIY";
 
         // Building the url to the web service
-        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters;
+        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "&" + parameters;
 
 
         return url;

@@ -499,12 +499,12 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
       /*  mClusterManager.cluster();
         setupCluster();*/
         //descoemntar luego
-       /* for (LatLng item : listPoints) {
+        for (LatLng item : listPoints) {
             if (i == listPoints.size() - 1) return;
             DrawRouteMaps.getInstance(this, this)
                     .draw(listPoints.get(i), listPoints.get(i + 1), mMap);
             i++;
-        }*/
+        }
 
     }
 
