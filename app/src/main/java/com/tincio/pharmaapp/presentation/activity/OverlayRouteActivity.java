@@ -100,7 +100,6 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
         rec_doctors = findViewById(R.id.rec_doctors);
         drawer_layout = findViewById(R.id.drawer_layout);
         ic_menu = findViewById(R.id.ic_menu);
-        daySelected = getString(R.string.chk_jueves);
 
         toolbar = findViewById(R.id.toolbar);
         mSwitchCompat = findViewById(R.id.switch_btn);
@@ -116,9 +115,10 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
         /***/
         listPoints = new ArrayList<>();
         listPointsMedicos = new ArrayList<>();
-        callMedicos();
         initControls();
         setEvents();
+      //  daySelected = getString(R.string.chk_jueves);
+        callMedicos();
     }
 
     /*@Override
@@ -136,6 +136,9 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
         presenterMenu.getListOpcionMenu();
 
         setupNavigationDrawer();
+        Calendar date = Calendar.getInstance();
+        daySelected(date.get(Calendar.DAY_OF_WEEK));
+        setTimeInSpinner(date);
        /* adapterDoctor = new MapAdapterRecycler(listMedicos, "Jueves");
         rec_doctors.setAdapter(adapterDoctor);*/
        /* rec_doctors.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -154,6 +157,10 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
 
         //   setUpSpinner()
 
+    }
+
+    void setTimeInSpinner(Calendar date){
+        mSpinner.setText(daySelected +" "+date.get(Calendar.DAY_OF_MONTH)+"/"+(date.get(Calendar.MONTH)+1));
     }
 
     void setEvents() {
@@ -194,6 +201,7 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
 
     private void callMedicos() {
         MedicosRequest request = new MedicosRequest();
+        Log.i("callmedicos", "dia selected "+daySelected);
         request.setDia(daySelected);// = daySelected
         request.setOffset(40);//= OFFSET
         presenter = new MedicosPresenterImpl(this);
@@ -239,13 +247,18 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
         mClusterManager.setRenderer(new CustomClusterRenderer(getContext(), mMap, mClusterManager));
         mMap.setOnCameraIdleListener(mClusterManager);
         mMap.setOnMarkerClickListener(mClusterManager);
+        setupCluster();
+       /* mClusterManager = new ClusterManager<MyItemCluster>(this, mMap);
+        mClusterManager.setRenderer(new CustomClusterRenderer(getContext(), mMap, mClusterManager));
+        mMap.setOnCameraIdleListener(mClusterManager);
+        mMap.setOnMarkerClickListener(mClusterManager);
         mClusterManager.setOnClusterItemClickListener(new ClusterManager.OnClusterItemClickListener<MyItemCluster>() {
             @Override
             public boolean onClusterItemClick(MyItemCluster myItemCluster) {
                 Log.i("itms seleccionados ", myItemCluster.getOrder() + " order item seleccionado");
                 ArrayList<MedicosResponse> lista = new ArrayList<>();
                 lista.add(myItemCluster.getItem());
-                adapterDoctor = new MapAdapterRecycler(lista, "Jueves");
+                adapterDoctor = new MapAdapterRecycler(lista, daySelected);
                 rec_doctors.setAdapter(adapterDoctor);
                 rec_doctors.setVisibility(View.VISIBLE);
                 setEventsRecyclerDoctor();
@@ -259,7 +272,43 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
                 for (MyItemCluster item : cluster.getItems()) {
                     lista.add(item.getItem());
                 }
-                adapterDoctor = new MapAdapterRecycler(lista, "Jueves");
+                adapterDoctor = new MapAdapterRecycler(lista, daySelected);
+                rec_doctors.setAdapter(adapterDoctor);
+                rec_doctors.setVisibility(View.VISIBLE);
+                //  lista.add(cluster.getItems());
+                setEventsRecyclerDoctor();
+                Log.i("itms seleccionados ", cluster.getItems().size() + " order item cluster seleccionado");
+                return false;
+            }
+        });*/
+
+        /*adapterDoctor = new MapAdapterRecycler(listMedicos, "Jueves");
+        rec_doctors.setAdapter(adapterDoctor);*/
+    }
+
+    void setupCluster(){
+
+        mClusterManager.setOnClusterItemClickListener(new ClusterManager.OnClusterItemClickListener<MyItemCluster>() {
+            @Override
+            public boolean onClusterItemClick(MyItemCluster myItemCluster) {
+                Log.i("itms seleccionados ", myItemCluster.getOrder() + " order item seleccionado");
+                ArrayList<MedicosResponse> lista = new ArrayList<>();
+                lista.add(myItemCluster.getItem());
+                adapterDoctor = new MapAdapterRecycler(lista, daySelected);
+                rec_doctors.setAdapter(adapterDoctor);
+                rec_doctors.setVisibility(View.VISIBLE);
+                setEventsRecyclerDoctor();
+                return false;
+            }
+        });
+        mClusterManager.setOnClusterClickListener(new ClusterManager.OnClusterClickListener<MyItemCluster>() {
+            @Override
+            public boolean onClusterClick(Cluster<MyItemCluster> cluster) {
+                ArrayList<MedicosResponse> lista = new ArrayList<>();
+                for (MyItemCluster item : cluster.getItems()) {
+                    lista.add(item.getItem());
+                }
+                adapterDoctor = new MapAdapterRecycler(lista, daySelected);
                 rec_doctors.setAdapter(adapterDoctor);
                 rec_doctors.setVisibility(View.VISIBLE);
                 //  lista.add(cluster.getItems());
@@ -268,11 +317,7 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
                 return false;
             }
         });
-
-        /*adapterDoctor = new MapAdapterRecycler(listMedicos, "Jueves");
-        rec_doctors.setAdapter(adapterDoctor);*/
     }
-
     void setEventsRecyclerDoctor() {
 
         adapterDoctor.setOnItemClickListener(new MapAdapterRecycler.OnItemClickListener() {
@@ -357,21 +402,22 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
             @Override
             public int compare(MedicosResponse lhs, MedicosResponse rhs) {
                 // -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
-                return getSeconds(lhs.getJuevesInicio()) > getSeconds(rhs.getJuevesInicio()) ? -1 :
-                        (getSeconds(lhs.getJuevesInicio()) < getSeconds(rhs.getJuevesInicio())) ? 1 : 0;
+                /*return getSeconds(lhs.getJuevesInicio()) > getSeconds(rhs.getJuevesInicio()) ? -1 :
+                        (getSeconds(lhs.getJuevesInicio()) < getSeconds(rhs.getJuevesInicio())) ? 1 : 0;*/
+                return getSeconds(getHour(lhs)) > getSeconds(getHour(rhs)) ? -1 :
+                        (getSeconds(getHour(lhs)) < getSeconds(getHour(rhs))) ? 1 : 0;
             }
         });
     }
-
 
 
     void checkTime() {
         listMedicosFinal = new ArrayList<>();
         if (this.listMedicos.size() == 0) return;
         MedicosResponse itemInicio = this.listMedicos.get(0);
-        listMedicosFinal.add(itemInicio);
+        listMedicosFinal.add(this.listMedicos.get(0));
         for (int i = 1; i < listMedicos.size(); i++) {
-            itemInicio= new MedicosResponse();
+            //itemInicio= new MedicosResponse();
             /**Si trabajan en el mismo hospital y mismo horario**/
             if (getHour(listMedicos.get(i)).equals(getHour(itemInicio)) && itemInicio.getLatitud() == listMedicos.get(i).getLatitud()) {
                 itemInicio = listMedicos.get(i);
@@ -379,6 +425,7 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
             } else {
                 /***Buscar el que este mas cerca**/
                 itemInicio = getMedicosMasCercaPoint(i, itemInicio);
+                if(itemInicio==null) return;
                 i = i+(itemInicio.getOrder()-i);
                // this.listMedicosFinal.add(itemInicio);
             }
@@ -393,9 +440,10 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
         for (int i = indiceStart; i < indiceStart + 5; i++) {
             if (i == listMedicos.size()) break;
             listMedicosTemp.add(listMedicos.get(i));
-            listMedicosTemp.get(listMedicosTemp.size()-1).setOrder(indiceStart);
+            listMedicosTemp.get(listMedicosTemp.size()-1).setOrder(i);
         }
 
+        if(itemCheck == null) return null;
         LatLng latLngReference = new LatLng(Double.parseDouble(itemCheck.getLatitud()), Double.parseDouble(itemCheck.getLongitud()));
 
         for (int i = 1; i < listMedicosTemp.size(); i++) {
@@ -448,12 +496,15 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
         zoomRoute(listPoints);
         drawPointInMap();
         int i = 0;
-        for (LatLng item : listPoints) {
+      /*  mClusterManager.cluster();
+        setupCluster();*/
+        //descoemntar luego
+       /* for (LatLng item : listPoints) {
             if (i == listPoints.size() - 1) return;
             DrawRouteMaps.getInstance(this, this)
                     .draw(listPoints.get(i), listPoints.get(i + 1), mMap);
             i++;
-        }
+        }*/
 
     }
 
@@ -523,6 +574,7 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
 
     private void setDateTimeField() {
         Calendar dateSelected = Calendar.getInstance();
+        Calendar dateNext = Calendar.getInstance();
         Calendar newCalendar = dateSelected;
         datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
 
@@ -532,13 +584,16 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
                 c.set(year, monthOfYear, dayOfMonth);
                 int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
                 daySelected(dayOfWeek);
+                setTimeInSpinner(c);
                 mMap.clear();
 
                 listPoints = new ArrayList<>();
                 listMedicos = new ArrayList<>();
+                listMedicosFinal = new ArrayList<>();
                 listPointsMedicos = new ArrayList<>();
-                mClusterManager = null;
-                mClusterManager = new ClusterManager<MyItemCluster>(getContext(), mMap);
+               /* mClusterManager = null;
+                mClusterManager = new ClusterManager<MyItemCluster>(getContext(), mMap);*/
+                mClusterManager.clearItems();
                 //mClusterManager.setAlgorithm(new GridBasedAlgorithm<MyItemCluster>());
                 callMedicos();
                 //    dateSelected.set(year, monthOfYear, dayOfMonth, 0, 0);
@@ -546,6 +601,9 @@ public class OverlayRouteActivity extends AppCompatActivity implements OnMapRead
             }
 
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.getDatePicker().setMinDate(dateSelected.getTimeInMillis());
+        dateNext.add(Calendar.DATE, 6);
+        datePickerDialog.getDatePicker().setMaxDate(dateNext.getTimeInMillis());
         datePickerDialog.show();
         // dateEditText.setText(dateFormatter.format(dateSelected.getTime()));
     }

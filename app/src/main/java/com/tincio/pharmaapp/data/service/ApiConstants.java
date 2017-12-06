@@ -8,7 +8,7 @@ public class ApiConstants {
     public static final String GET_USUARIO = "Usuario";
     public static final String GET_MEDICOS_LUNES = "medicos?where=lunes_inicio!%3D''";
     public static final String GET_MEDICOS_MARTES = "medicos?where=martes_inicio!%3D''";
-    public static final String GET_MEDICOS_MIERCOLES = "medicos?where=miercoles_inicio!%3D''";
+    public static final String GET_MEDICOS_MIERCOLES = "medicos?where=miercoles_incio!%3D''";
     public static final String GET_MEDICOS_JUEVES = "medicos?where=jueves_inicio!%3D''";
-    public static final String GET_MEDICOS_VIERNES = "medicos?where=viernes_inicio!%3D''";
+    public static final String GET_MEDICOS_VIERNES = "medicos?where=viernes_incio!%3D''";
 }

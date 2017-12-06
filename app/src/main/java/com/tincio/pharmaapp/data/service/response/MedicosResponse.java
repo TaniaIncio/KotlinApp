@@ -14,7 +14,7 @@ public class MedicosResponse {
     @SerializedName("id")
     @Expose
     private String id;
-    @SerializedName("miercoles_inicio")
+    @SerializedName("miercoles_incio")
     @Expose
     private String miercolesInicio;
     @SerializedName("viernes_fin")
@@ -96,7 +96,7 @@ public class MedicosResponse {
     @SerializedName("tipo_medico")
     @Expose
     private String tipoMedico;
-    @SerializedName("viernes_inicio")
+    @SerializedName("viernes_incio")
     @Expose
     private String viernesInicio;
     @SerializedName("prioridad")
